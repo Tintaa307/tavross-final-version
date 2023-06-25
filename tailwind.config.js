@@ -30,6 +30,8 @@ module.exports = {
         800: "#075985",
         900: "#0c4a6e",
       },
+      transparent: "transparent",
+      red: "#ef4444",
     },
     extend: {
       backgroundImage: {

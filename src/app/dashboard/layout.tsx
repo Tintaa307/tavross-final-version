@@ -1,5 +1,6 @@
 "use client"
 
+import Nav from "@/components/nav/Nav"
 import { Session } from "next-auth"
 import { SessionProvider } from "next-auth/react"
 
@@ -13,7 +14,8 @@ export default function RootLayout({
   return (
     <>
       <SessionProvider session={session}>
-        <main>{children}</main>
+        <Nav />
+        {children}
       </SessionProvider>
     </>
   )
