@@ -5,10 +5,14 @@ import Loader from "@/components/shared/Loader"
 import { signOut, useSession } from "next-auth/react"
 import React from "react"
 import { statusAuth } from "@/objects/status"
+import Posts from "@/components/posters/Posts"
+import { useRouter } from "next/navigation"
 
 const Dashboard = () => {
   const { status } = useSession()
   const { LOADING } = statusAuth
+  const router = useRouter()
+
   return (
     <>
       {status === LOADING ? (
@@ -36,7 +40,10 @@ const Dashboard = () => {
               </button>
             </div>
             <div className="">
-              <button className="text-white font-light flex flex-row justify-center items-center gap-2 transition-all">
+              <button
+                onClick={() => router.push("/video")}
+                className="text-white font-light flex flex-row justify-center items-center gap-2 transition-all"
+              >
                 <div className="w-8 h-8 border-2 border-white rounded-full flex items-center justify-center">
                   <i
                     className={["ri-play-line", "font-thin text-xl"].join(" ")}
@@ -46,15 +53,21 @@ const Dashboard = () => {
               </button>
             </div>
           </article>
-          <div className="absolute w-44 h-10 border-2 border-blue-400 left-24 -rotate-6 flex items-center justify-center text-white rounded font-normal">
-            #PROGRESS
-          </div>
-          <div className="absolute w-44 h-10 border-2 border-red top-36 right-16 rotate-6 flex items-center justify-center text-white rounded font-normal">
-            #IMPROVEYOURSELF
-          </div>
-          <div className="absolute w-44 h-10 border-2 border-orange bottom-20 right-24 -rotate-6 flex items-center justify-center text-white rounded font-normal">
-            #YOUARETHEBEST
-          </div>
+          <Posts
+            message="#PROGRESS"
+            color="border-blue-400"
+            position="left-24"
+          />
+          <Posts
+            message="#YOUARETHEBEST"
+            color="border-orange"
+            position="bottom-20 right-24"
+          />
+          <Posts
+            message="#IMPROVEYOURSELF"
+            color="border-red"
+            position="top-36 right-16"
+          />
         </main>
       )}
     </>
@@ -62,3 +75,5 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+
+//bottom-20 right-24 top-36 right-16
