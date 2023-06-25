@@ -19,3 +19,8 @@ body {
 ::-webkit-scrollbar-thumb {
   background-color: #1f1f2e;
 }
+
+.special {
+  color: transparent;
+  -webkit-text-stroke: 1px #fff;
+}

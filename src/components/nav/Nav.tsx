@@ -27,22 +27,22 @@ const Nav = () => {
       icon: "ri-home-line",
     },
     {
-      name: "Rutinas",
+      name: "Rutines",
       path: "/dashboard/rutinas",
       icon: "ri-table-line",
     },
     {
-      name: "Tu RM",
+      name: "Your RM",
       path: "/dashboard/rm",
       icon: "ri-calculator-line",
     },
     {
-      name: "Progreso",
+      name: "Progress",
       path: "/dashboard/progreso",
       icon: "ri-bar-chart-2-line",
     },
     {
-      name: "Contacto",
+      name: "Contact",
       path: "/dashboard/contacto",
       icon: "ri-phone-line",
     },

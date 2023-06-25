@@ -32,6 +32,7 @@ module.exports = {
       },
       transparent: "transparent",
       red: "#ef4444",
+      orange: "#f97316",
     },
     extend: {
       backgroundImage: {
