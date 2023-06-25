@@ -234,7 +234,7 @@ const Register = () => {
                     </div>
                   )}
                 </div>
-                <div className="w-1/2 flex flex-row mb-5">
+                <div className="w-1/2 flex flex-row mb-1">
                   <Field
                     type="checkbox"
                     name="terms"
@@ -254,6 +254,11 @@ const Register = () => {
                     .
                   </p>
                 </div>
+                {errors.terms && touched.terms && (
+                  <div className="text-red mt-4 font-normal text-sm">
+                    {errors.terms}
+                  </div>
+                )}
                 <button
                   type="submit"
                   className="w-1/2 h-12 px-4 rounded bg-blue-800 text-white mb-5"
