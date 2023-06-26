@@ -6,6 +6,12 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    dropShadow: {
+      custom: "0 0px 40px rgb(103, 156, 235)",
+      skyblue: "0 0px 20px rgb(103, 156, 235)",
+      orange: "0 0px 20px rgb(249, 115, 22)",
+      red: "0 0px 20px rgb(239, 68, 68)",
+    },
     colors: {
       white: "#ffffff",
       black: "#000000",

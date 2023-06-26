@@ -27,7 +27,7 @@ const Nav = () => {
       icon: "ri-home-line",
     },
     {
-      name: "Rutines",
+      name: "Your rutines",
       path: "/dashboard/rutinas",
       icon: "ri-table-line",
     },

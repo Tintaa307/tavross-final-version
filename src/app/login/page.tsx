@@ -93,11 +93,11 @@ const Login = () => {
       </div>
       <section className="w-1/2 h-full absolute left-0 top-0 flex items-center justify-center">
         <Image
-          src={"/login-image.png"}
+          src={"/david-laid.png"}
           alt="login-image"
           width={350}
           height={700}
-          className="absolute mt-12"
+          className="absolute mt-20 drop-shadow-custom"
         />
       </section>
       <section className="w-1/2 h-full absolute right-0 top-0 mt-16">
