@@ -32,20 +32,6 @@ function getGoogleCredentials() {
   }
 }
 
-export const sendVerificationRequest1: EmailConfig["sendVerificationRequest"] =
-  async ({ identifier: email, url, provider: { server } }) => {
-    console.log("sendVerificationRequest", email, url, server)
-    const { host } = new URL(url)
-    const transport = nodemailer.createTransport(server)
-    const generateEmailArgs = { url, host, email }
-    await transport.sendMail({
-      to: email,
-      from: process.env.EMAIL_FROM,
-      text: generateTextEmail(generateEmailArgs),
-      html: generateHtmlEmail(generateEmailArgs),
-    })
-  }
-
 type GenerateEmailArgs = {
   url: string
   host: string
