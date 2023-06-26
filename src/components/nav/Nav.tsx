@@ -67,7 +67,7 @@ const Nav = () => {
         </div>
         <div
           className={[
-            "fixed top-0 left-0 w-80 h-screen bg-[#161b22] rounded-r-2xl z-40",
+            "fixed top-0 left-0 w-80 h-screen bg-[#1f1f2e] rounded-r-2xl z-40",
             isOpen,
           ].join(" ")}
         >
