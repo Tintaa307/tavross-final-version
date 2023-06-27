@@ -13,6 +13,7 @@ const Nav = () => {
   const { data: session, status } = useSession()
   const router = useRouter()
   const [userImage, setUserImage] = useState("")
+
   useEffect(() => {
     if (session) {
       if (session?.user?.image) {
@@ -20,6 +21,7 @@ const Nav = () => {
       }
     }
   }, [session])
+
   const navItems = [
     {
       name: "Home",

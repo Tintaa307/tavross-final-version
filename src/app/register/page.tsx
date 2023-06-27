@@ -42,7 +42,11 @@ const Register = () => {
   async function loginWithGoogle() {
     setIsLoading(true)
     try {
-      await signIn("google")
+      await signIn("google").then((response) => {
+        console.log(response)
+        toast.success("email sent")
+        router.push("/verify")
+      })
     } catch (error) {
       // display error message to user
       toast.error("Something went wrong with your login.")
@@ -52,6 +56,7 @@ const Register = () => {
   }
 
   const saveUser = async (values: RegisterValues) => {
+    setIsLoading(true)
     try {
       await axios
         .post("/api/register", {
@@ -61,12 +66,14 @@ const Register = () => {
         })
         .then((response) => {
           console.log(response.data)
-          router.push("/login")
-          toast.success("User created successfully")
+          toast.success("email sent")
+          router.push("/verify")
         })
         .catch((error) => console.log("error", error))
     } catch (error) {
       toast.error("Something went wrong with your login.")
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -263,7 +270,13 @@ const Register = () => {
                   type="submit"
                   className="w-1/2 h-12 px-4 rounded bg-blue-800 text-white mb-5"
                 >
-                  Sign up
+                  {isLoading ? (
+                    <main className="w-full h-full flex items-center justify-center">
+                      <div className="w-4 h-4 rounded-full border-4 border-solid border-white border-l-transparent bg-transparent animate-spin" />
+                    </main>
+                  ) : (
+                    "Sign up"
+                  )}
                 </button>
               </div>
             </Form>
