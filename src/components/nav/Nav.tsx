@@ -148,7 +148,7 @@ const Nav = () => {
               <button className="w-40 h-14">
                 <small
                   onClick={() => router.push("/login")}
-                  className="text-white text-base font-normal border-b-[1.7px] pb-1 border-blue-600 border-opacity-0 hover:border-opacity-100 transition-all"
+                  className="text-white text-base font-normal border-b-[1.9px] pb-1 border-blue-600 border-opacity-0 hover:border-opacity-100 transition-all"
                 >
                   Sign in
                 </small>

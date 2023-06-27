@@ -56,6 +56,7 @@ const Login = () => {
   }
 
   const loginWithEmail = async (values: LoginValues) => {
+    setIsLoading(true)
     try {
       await signIn("credentials", {
         email: values.email,
@@ -82,6 +83,8 @@ const Login = () => {
         toast.error(error.message)
         return
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -181,6 +184,7 @@ const Login = () => {
                     type="email"
                     name="email"
                     id="1"
+                    onFocus={() => setIsFocused("1")}
                     onClick={() => setIsFocused("1")}
                     onBlur={() => setIsFocused("")}
                     value={values.email}
@@ -211,6 +215,7 @@ const Login = () => {
                     type="password"
                     name="password"
                     id="2"
+                    onFocus={() => setIsFocused("2")}
                     onClick={() => setIsFocused("2")}
                     onBlur={() => setIsFocused("")}
                     value={values.password}
@@ -222,12 +227,21 @@ const Login = () => {
                     </div>
                   )}
                 </div>
-                <button
-                  type="submit"
-                  className="w-1/2 h-12 px-4 rounded bg-blue-800 text-white"
-                >
-                  Sign in
-                </button>
+                {isLoading ? (
+                  <button
+                    type="submit"
+                    className="w-1/2 h-12 flex items-center justify-center px-4 rounded bg-transparent text-white mb-5 border-[1px] border-blue-800"
+                  >
+                    <div className="w-6 h-6 rounded-full border-2 border-solid border-blue-500 border-l-transparent bg-transparent animate-spin" />
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="w-1/2 h-12 px-4 rounded bg-blue-800 text-white mb-5"
+                  >
+                    Sign up
+                  </button>
+                )}
                 <div>
                   <Link
                     href={"/recover-password"}

@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils"
 import { RegisterValues } from "@/types"
 import axios from "axios"
 import { Field, Form, Formik } from "formik"
+import Email from "next-auth/providers/email"
 import { signIn } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
@@ -38,6 +39,7 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const [isFocused, setIsFocused] = useState("")
+  const [userToken, setUserToken] = useState("")
 
   async function loginWithGoogle() {
     setIsLoading(true)
@@ -67,7 +69,9 @@ const Register = () => {
         .then((response) => {
           console.log(response.data)
           toast.success("email sent")
-          router.push("/verify")
+          router.push(
+            "/verify/5ec1b41e182286115d250562e1a33a30810ce4fafbfc2c2febd2c4f01426c776%7Cd58343b431312f30f95fa5fe97e31a5221c84be76d510ba5283579eacbb82e9a"
+          )
         })
         .catch((error) => console.log("error", error))
     } catch (error) {
@@ -83,9 +87,9 @@ const Register = () => {
       <div className="absolute m-14">
         <h2 className="text-white font-normal text-3xl">Tavross</h2>
       </div>
-      <section className="w-1/2 h-full absolute left-0 top-0 flex items-center justify-center">
+      <section className="w-1/2 h-full absolute left-0 top-0 flex items-center justify-center drop-shadow-custom">
         <Image
-          src={"/login-image.png"}
+          src={"/david-laid.png"}
           alt="login-image"
           width={350}
           height={700}
@@ -167,17 +171,18 @@ const Register = () => {
                   <label
                     className={cn("text-white font-normal z-10", {
                       "absolute mt-4 transition-all": isFocused !== "1",
-                      "absolute -mt-4 text-sm transition-all":
+                      "absolute -mt-4 text-sm transition-all text-[#ffffff57]":
                         isFocused === "1" || values.name.length > 0,
                     })}
                     id="1"
                     htmlFor="Email"
                   >
-                    Fullname
+                    Full name
                   </label>
                   <Field
                     type="text"
                     name="name"
+                    onFocus={() => setIsFocused("1")}
                     onClick={() => setIsFocused("1")}
                     onBlur={() => setIsFocused("")}
                     value={values.name}
@@ -193,7 +198,7 @@ const Register = () => {
                   <label
                     className={cn("text-white font-normal z-10", {
                       "absolute mt-4 transition-all": isFocused !== "2",
-                      "absolute -mt-4 text-sm transition-all":
+                      "absolute -mt-4 text-sm transition-all text-[#ffffff57]":
                         isFocused === "2" || values.email.length > 0,
                     })}
                     id="2"
@@ -205,6 +210,7 @@ const Register = () => {
                     type="email"
                     name="email"
                     value={values.email}
+                    onFocus={() => setIsFocused("2")}
                     onClick={() => setIsFocused("2")}
                     onBlur={() => setIsFocused("")}
                     className="w-full relative h-14 bg-transparent border-b-[1px] border-gray-500 px-2 outline-none z-20 text-white text-normal text-base"
@@ -219,7 +225,7 @@ const Register = () => {
                   <label
                     className={cn("text-white font-normal z-10", {
                       "absolute mt-4 transition-all": isFocused !== "3",
-                      "absolute -mt-4 text-sm transition-all":
+                      "absolute -mt-4 text-sm transition-all text-[#ffffff57]":
                         isFocused === "3" || values.password.length > 0,
                     })}
                     id="3"
@@ -231,6 +237,7 @@ const Register = () => {
                     type="password"
                     name="password"
                     value={values.password}
+                    onFocus={() => setIsFocused("3")}
                     onClick={() => setIsFocused("3")}
                     onBlur={() => setIsFocused("")}
                     className="w-full relative h-14 bg-transparent border-b-[1px] border-gray-500 px-2 outline-none z-20 text-white text-normal text-base"
@@ -266,18 +273,21 @@ const Register = () => {
                     {errors.terms}
                   </div>
                 )}
-                <button
-                  type="submit"
-                  className="w-1/2 h-12 px-4 rounded bg-blue-800 text-white mb-5"
-                >
-                  {isLoading ? (
-                    <main className="w-full h-full flex items-center justify-center">
-                      <div className="w-4 h-4 rounded-full border-4 border-solid border-white border-l-transparent bg-transparent animate-spin" />
-                    </main>
-                  ) : (
-                    "Sign up"
-                  )}
-                </button>
+                {isLoading ? (
+                  <button
+                    type="submit"
+                    className="w-1/2 h-12 flex items-center justify-center px-4 rounded bg-transparent text-white mb-5 border-[1px] border-blue-800"
+                  >
+                    <div className="w-6 h-6 rounded-full border-2 border-solid border-blue-500 border-l-transparent bg-transparent animate-spin" />
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="w-1/2 h-12 px-4 rounded bg-blue-800 text-white mb-5"
+                  >
+                    Sign up
+                  </button>
+                )}
               </div>
             </Form>
           )}
