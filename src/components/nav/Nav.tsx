@@ -106,12 +106,14 @@ const Nav = () => {
                 <Image
                   src={userImage}
                   alt="user-image"
-                  className="rounded-full cursor mx-4"
+                  className="rounded-full cursor-pointer mx-4"
                   width={35}
                   height={35}
                 />
               ) : (
-                <i className="ri-user-line text-white text-4xl" />
+                <div className="w-14 h-14 mx-4 cursor-pointer bg-transparent border-2 border-blue-500 rounded-full flex items-center justify-center">
+                  <i className="ri-user-line text-white text-2xl" />
+                </div>
               )}
               <div className="flex flex-col">
                 <h4 className="text-white font-normal text-sm">
