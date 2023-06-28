@@ -9,6 +9,7 @@ module.exports = {
     dropShadow: {
       custom: "0 0px 40px rgb(103, 156, 235)",
       skyblue: "0 0px 20px rgb(103, 156, 235)",
+      green: "0 0px 40px rgb(24, 216, 18)",
       orange: "0 0px 20px rgb(249, 115, 22)",
       red: "0 0px 20px rgb(239, 68, 68)",
     },
