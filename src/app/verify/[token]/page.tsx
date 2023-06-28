@@ -1,3 +1,5 @@
+"use client"
+
 import { useRouter } from "next/navigation"
 import React, { useEffect, useState } from "react"
 import "remixicon/fonts/remixicon.css"
@@ -6,15 +8,15 @@ const VerifyEmail = () => {
   const [counter, setCounter] = useState(0)
   const router = useRouter()
 
-  useEffect(() => {
-    setTimeout(() => {
-      setCounter((prevState) => prevState + 1)
-    }, 1000)
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setCounter((prevState) => prevState + 1)
+  //   }, 1000)
 
-    if (counter >= 10) {
-      router.push("/login")
-    }
-  })
+  //   if (counter >= 10) {
+  //     router.push("/login")
+  //   }
+  // }, [])
 
   return (
     <main className="w-full h-screen flex items-center justify-center drop-shadow-green">
@@ -28,11 +30,13 @@ const VerifyEmail = () => {
               ].join(" ")}
             />
           </div>
-          <div>
+          <div className="flex flex-col">
             <h2 className="text-white font-normal text-lg">
               Te has verificado correctamente!
             </h2>
-            <small>Te redirigiremos en {state}</small>
+            <small className="text-white font-normal text-base">
+              Te redirigiremos en {counter}
+            </small>
           </div>
         </div>
       </div>
