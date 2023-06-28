@@ -15,7 +15,6 @@ const variants: Variants = {
     transition: {
       duration: 0.3,
       type: "tween",
-      bounce: 0.3,
     },
   },
   closed: {
@@ -24,7 +23,6 @@ const variants: Variants = {
     transition: {
       duration: 0.3,
       type: "tween",
-      bounce: 0.3,
       damping: 40,
     },
   },
