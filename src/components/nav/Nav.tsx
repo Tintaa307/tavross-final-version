@@ -34,7 +34,6 @@ const iconVariants: Variants = {
     transition: {
       duration: 0.4,
       type: "tween",
-      bounce: 0.3,
     },
   },
   closed: {
@@ -43,8 +42,6 @@ const iconVariants: Variants = {
     transition: {
       duration: 0.3,
       type: "tween",
-      bounce: 0.3,
-      damping: 40,
     },
   },
 }
