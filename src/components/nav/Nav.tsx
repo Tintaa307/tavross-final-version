@@ -5,6 +5,52 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import React, { useEffect, useState } from "react"
 import "remixicon/fonts/remixicon.css"
+import { Variants, motion } from "framer-motion"
+import { cn } from "@/lib/utils"
+
+const variants: Variants = {
+  open: {
+    width: "350px",
+    height: "500px",
+    transition: {
+      duration: 0.3,
+      type: "tween",
+      bounce: 0.3,
+    },
+  },
+  closed: {
+    width: "20px",
+    height: "20px",
+    transition: {
+      duration: 0.3,
+      type: "tween",
+      bounce: 0.3,
+      damping: 40,
+    },
+  },
+}
+
+const iconVariants: Variants = {
+  open: {
+    x: 146,
+    y: -221,
+    transition: {
+      duration: 0.4,
+      type: "tween",
+      bounce: 0.3,
+    },
+  },
+  closed: {
+    x: 0,
+    y: 0,
+    transition: {
+      duration: 0.3,
+      type: "tween",
+      bounce: 0.3,
+      damping: 40,
+    },
+  },
+}
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(
@@ -13,6 +59,7 @@ const Nav = () => {
   const { data: session, status } = useSession()
   const router = useRouter()
   const [userImage, setUserImage] = useState("")
+  const [openState, setOpenState] = useState(false)
 
   useEffect(() => {
     if (session) {
@@ -166,14 +213,42 @@ const Nav = () => {
             </div>
           </article>
         ) : (
-          <article className="absolute top-7 right-14 flex flex-row">
-            <div className="">
-              <i
-                className={[
-                  "ri-settings-2-line",
-                  "text-white text-2xl cursor-pointer",
-                ].join(" ")}
-              ></i>
+          <article className="absolute top-5 right-12 flex flex-row">
+            <div onClick={() => setOpenState(!openState)} className="">
+              <Image
+                src={userImage}
+                alt="user-image"
+                className="rounded-full cursor-pointer"
+                width={45}
+                height={45}
+              />
+              <motion.div
+                initial={"closed"}
+                variants={variants}
+                animate={openState ? "open" : "closed"}
+                className="absolute flex items-center justify-center top-8 right-0 bg-[#1f1f2e] rounded-lg z-40"
+              >
+                <motion.i
+                  initial={"closed"}
+                  variants={iconVariants}
+                  animate={openState ? "open" : "closed"}
+                  className={cn(
+                    "ri-arrow-down-s-line",
+                    "text-white text-xs rounded cursor-pointer",
+                    openState ? "hidden" : "block"
+                  )}
+                />
+                <motion.i
+                  initial={"closed"}
+                  variants={iconVariants}
+                  animate={openState ? "open" : "closed"}
+                  className={cn(
+                    "ri-close-line",
+                    "text-white text-xl rounded cursor-pointer",
+                    openState ? "block" : "hidden"
+                  )}
+                />
+              </motion.div>
             </div>
           </article>
         )}
