@@ -23,7 +23,6 @@ const variants: Variants = {
     transition: {
       duration: 0.3,
       type: "tween",
-      damping: 40,
     },
   },
 }
