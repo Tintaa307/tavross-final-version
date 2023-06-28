@@ -47,7 +47,6 @@ const Register = () => {
       await signIn("google").then((response) => {
         console.log(response)
         toast.success("email sent")
-        router.push("/verify")
       })
     } catch (error) {
       // display error message to user
@@ -69,9 +68,6 @@ const Register = () => {
         .then((response) => {
           console.log(response.data)
           toast.success("email sent")
-          router.push(
-            "/verify/5ec1b41e182286115d250562e1a33a30810ce4fafbfc2c2febd2c4f01426c776%7Cd58343b431312f30f95fa5fe97e31a5221c84be76d510ba5283579eacbb82e9a"
-          )
         })
         .catch((error) => console.log("error", error))
     } catch (error) {
