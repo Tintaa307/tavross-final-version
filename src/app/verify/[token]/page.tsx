@@ -5,18 +5,18 @@ import React, { useEffect, useState } from "react"
 import "remixicon/fonts/remixicon.css"
 
 const VerifyEmail = () => {
-  const [counter, setCounter] = useState(0)
+  const [counter, setCounter] = useState(10)
   const router = useRouter()
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setCounter((prevState) => prevState + 1)
-  //   }, 1000)
+  useEffect(() => {
+    setTimeout(() => {
+      setCounter(counter > 0 ? counter - 1 : 0)
+    }, 800)
 
-  //   if (counter >= 10) {
-  //     router.push("/login")
-  //   }
-  // }, [])
+    // if (counter === 0) {
+    //   router.push("/login")
+    // }
+  }, [counter])
 
   return (
     <main className="w-full h-screen flex items-center justify-center drop-shadow-green">
@@ -30,7 +30,7 @@ const VerifyEmail = () => {
               ].join(" ")}
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-2">
             <h2 className="text-white font-normal text-lg">
               Te has verificado correctamente!
             </h2>
