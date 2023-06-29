@@ -42,6 +42,7 @@ const Login = () => {
             toast.error("Something went wrong with your login.")
           } else {
             toast.success("You have successfully logged in.")
+            router.push("/dashboard")
           }
         })
         .catch((error) => {
