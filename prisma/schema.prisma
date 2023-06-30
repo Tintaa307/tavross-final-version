@@ -53,11 +53,9 @@ model Session {
 
 model VerificationToken {
   id         Int      @id @default(autoincrement())
-  identifier String
-  token      String   @unique
+  identifier String   @unique
+  token      String   @db.Text
   expires    DateTime
-
-  @@unique([identifier, token])
 }
 
 model Rutines {

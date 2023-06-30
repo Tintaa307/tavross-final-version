@@ -1,22 +1,39 @@
 "use client"
 
+import axios from "axios"
 import { useRouter } from "next/navigation"
 import React, { useEffect, useState } from "react"
 import "remixicon/fonts/remixicon.css"
+import { useParams } from "next/navigation"
 
 const VerifyEmail = () => {
   const [counter, setCounter] = useState(10)
   const router = useRouter()
+  const params = useParams()
+  const [isVerified, setIsVerified] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => {
-      setCounter(counter > 0 ? counter - 1 : 0)
-    }, 800)
+    handleVerified()
+  })
 
-    // if (counter === 0) {
-    //   router.push("/login")
-    // }
-  }, [counter])
+  useEffect(() => {}, [counter])
+
+  const handleVerified = async () => {
+    try {
+      await axios
+        .post("../api/verified", {
+          token: params!.token,
+        })
+        .then((response) => {
+          console.log(response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <main className="w-full h-screen flex items-center justify-center drop-shadow-green">
