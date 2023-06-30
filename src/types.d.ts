@@ -26,3 +26,12 @@ export interface RegisterValues {
   password: string
   terms?: boolean
 }
+
+export interface DecodedToken {
+  expiresIn: string
+  data: {
+    name: string
+    email: string
+  }
+  iat: number
+}

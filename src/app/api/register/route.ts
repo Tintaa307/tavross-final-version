@@ -18,7 +18,7 @@ export async function POST(req: Request) {
 
     const token = jwt.sign(
       {
-        expiresIn: "2m",
+        expiresIn: "5m",
         data: {
           name,
           email,
@@ -41,7 +41,7 @@ export async function POST(req: Request) {
 
     const createToken = await prismadb.verificationToken.create({
       data: {
-        identifier: email,
+        identifier: token,
         token: refreshToken,
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
       },
@@ -85,7 +85,7 @@ export async function POST(req: Request) {
               Welcome to <span style={{ color: "#0ea5e9" }}> Tavross!🦾</span>
             </h1>
             <p style={{ fontSize: "0.875rem", color: "#ffffff57" textAlign: "center" }}>Please confirm your email to finish creating your account.</p>
-            <a href="https://tavross-final-version.vercel.app/verify/${token}" style={{
+            <a href="http://localhost:3000/verify/${token}" style={{
               fontSize: "0.955rem",
               color: "#ffffff",
               borderRadius: "10px",

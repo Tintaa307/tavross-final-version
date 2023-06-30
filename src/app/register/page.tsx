@@ -78,19 +78,7 @@ const Register = () => {
   }
 
   return (
-    <main
-      style={{
-        width: "300px",
-        height: "400px",
-        display: "flex",
-        justifyItems: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        gap: "1rem",
-        backgroundColor: "#f3f3f3",
-      }}
-      className="w-full h-screen"
-    >
+    <main className="w-full h-screen">
       <Toaster />
       <div className="absolute m-14">
         <h2 className="text-white font-normal text-3xl">Tavross</h2>

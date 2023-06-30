@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import jwt from "jsonwebtoken"
 import prismadb from "../../../lib/db"
+import { DecodedToken } from "@/types"
 
 export async function POST(req: Request) {
   try {
@@ -14,13 +15,15 @@ export async function POST(req: Request) {
 
     console.log(token)
 
+    const decode = jwt.decode(token) as jwt.JwtPayload
+
     if (!token) {
-      return NextResponse.json({ error: "Token not found" }, { status: 404 })
+      return NextResponse.json({ error: "Token not found" }, { status: 409 })
     }
 
     const getRefreshToken = await prismadb.verificationToken.findUnique({
       where: {
-        identifier: token.email,
+        identifier: token,
       },
     })
 
@@ -34,15 +37,20 @@ export async function POST(req: Request) {
     if (getRefreshToken) {
       const userAuth = await prismadb.user.update({
         where: {
-          email: token!.email,
+          email: decode.data.email,
         },
         data: {
           emailVerified: true,
         },
       })
 
-      NextResponse.json(
-        { message: "Email verified", data: userAuth },
+      if (!userAuth) {
+        return NextResponse.json({ error: "User not found" }, { status: 404 })
+      }
+
+      console.log(userAuth)
+      return NextResponse.json(
+        { message: "Email verified", data: userAuth.emailVerified },
         { status: 200 }
       )
     }

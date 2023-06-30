@@ -53,7 +53,7 @@ model Session {
 
 model VerificationToken {
   id         Int      @id @default(autoincrement())
-  identifier String   @unique
+  identifier String   @unique @db.VarChar(512)
   token      String   @db.Text
   expires    DateTime
 }
