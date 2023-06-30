@@ -72,6 +72,10 @@ export const authOptions: NextAuthOptions = {
           throw new Error("No se encontro el usuario")
         }
 
+        if (user.emailVerified !== true) {
+          throw new Error("Tu correo no esta verficado aún")
+        }
+
         const isCorrectPassword = await bcrypt.compare(
           credentials.password,
           user.password!
