@@ -15,10 +15,6 @@ const VerifyEmail = () => {
   const [isVerified, setIsVerified] = useState(false)
 
   useEffect(() => {
-    handleVerified()
-  })
-
-  useEffect(() => {
     if (isVerified) {
       setTimeout(() => {
         setCounter(counter !== 0 ? counter - 1 : 0)
@@ -48,6 +44,7 @@ const VerifyEmail = () => {
     }
   }
 
+  handleVerified()
   return (
     <main
       className={cn("w-full h-screen flex items-center justify-center", {
