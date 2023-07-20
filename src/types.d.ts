@@ -35,3 +35,11 @@ export interface DecodedToken {
   }
   iat: number
 }
+
+export interface Rutine {
+  id?: string
+  name: string
+  frequency: string
+  category: string
+  identifier?: string
+}

@@ -61,6 +61,8 @@ model VerificationToken {
 model Rutines {
   id              Int               @id @default(autoincrement())
   name            String
+  frequency       String
+  category        String
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   userId          Int

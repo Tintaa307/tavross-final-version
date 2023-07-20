@@ -47,6 +47,7 @@ const Register = () => {
       await signIn("google").then((response) => {
         console.log(response)
         toast.success("email sent")
+        router.push("/dashboard")
       })
     } catch (error) {
       // display error message to user

@@ -121,6 +121,7 @@ export async function POST(req: Request) {
           email: email,
           password: hashedPassword,
           image: "",
+          emailVerified: false,
         },
       })
 
