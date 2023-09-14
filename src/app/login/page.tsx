@@ -240,7 +240,7 @@ const Login = () => {
                     type="submit"
                     className="w-1/2 h-12 px-4 rounded bg-blue-800 text-white mb-5"
                   >
-                    Sign up
+                    Sign in
                   </button>
                 )}
                 <div>

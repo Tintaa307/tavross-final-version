@@ -88,6 +88,18 @@ const Rutines = () => {
     },
   })
 
+  const [filteredRutines, setFilteredRutines] = useState<Rutine[]>(rutines)
+
+  useEffect(() => {
+    console.log(filteredRutines)
+  }, [filteredRutines])
+
+  const filterRutines = (filter: string) => {
+    setFilteredRutines(
+      rutines.filter((rutine: Rutine) => rutine.name.includes(filter))
+    )
+  }
+
   if (isLoading) return <Loader />
   else if (isError) console.log(error)
 
@@ -99,9 +111,11 @@ const Rutines = () => {
         <main className="w-full h-[86vh] flex items-center justify-center flex-col">
           <Toaster />
           <div className="w-full h-full flex items-center justify-center flex-col gap-12">
-            {rutines?.length === 0 && <Card />}
+            {filteredRutines?.length === 0 && <Card />}
             <div className="w-full h-max flex items-center justify-normal text-center flex-col gap-6">
-              <h1 className="text-white font-semibold text-5xl">Tus rutinas</h1>
+              <h1 className="text-white font-semibold text-5xl mt-28">
+                Tus rutinas
+              </h1>
               <p className="w-1/4 text-gray-400 text-normal text-base">
                 Aqui podrás ver todas tus rutinas, crear nuevas y editar las que
                 ya tienes creadas.
@@ -120,6 +134,7 @@ const Rutines = () => {
                     type="text"
                     placeholder="Buscar rutina..."
                     className="w-72 h-11 bg-transparent border-[1px] border-gray-400 text-gray-400 text-base font-medium pl-10 rounded-md outline-none focus:outline-[3px] focus:outline-gray-500 transition-all duration-100"
+                    onChange={(e) => filterRutines(e.target.value)}
                   />
                 </div>
                 <Select>
@@ -145,18 +160,18 @@ const Rutines = () => {
               </nav>
               <div
                 className={cn(
-                  "w-[660px] h-[max] flex items-center justify-center flex-col border-gray-400 border-[1px] rounded-md",
+                  "w-[660px] h-[max] flex items-center justify-center flex-col border-gray-400 border-[1px] rounded-md mb-6",
                   {
                     "overflow-y-scroll max-h-[600px]": rutines.length > 7,
                   }
                 )}
               >
-                {rutines.map((rutine: Rutine) => {
+                {filteredRutines.map((rutine: Rutine) => {
                   return (
                     <div
                       key={rutine.id}
                       className={cn(
-                        "w-full h-max flex items-center justify-between px-4 py-3 hover:bg-slate-400 hover:bg-opacity-20 transition-colors duration-200",
+                        "w-full h-max flex items-center justify-between px-4 py-3 hover:bg-slate-400 hover:bg-opacity-20 transition-colors duration-200 ",
                         {
                           "border-b-[1px] border-gray-400":
                             rutines.indexOf(rutine) !== rutines.length - 1,
