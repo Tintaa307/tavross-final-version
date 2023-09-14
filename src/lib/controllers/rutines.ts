@@ -13,3 +13,7 @@ export const getRutines = async (id: string) => {
   const rutines = await rutineAPI.get(`/get/${id}`)
   return rutines.data
 }
+
+export const deleteRutine = async (id: string) => {
+  await rutineAPI.delete(`/delete/${id}`)
+}

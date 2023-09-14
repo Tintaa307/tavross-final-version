@@ -13,11 +13,19 @@ import { useMutation } from "react-query"
 import { createRutine } from "@/lib/controllers/rutines"
 import toast, { Toaster } from "react-hot-toast"
 import { motion } from "framer-motion"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 const rutineSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
   frequency: Yup.string().required("Frequency is required"),
-  category: Yup.string().required("Category is required"),
 })
 
 const Create = () => {
@@ -25,6 +33,7 @@ const Create = () => {
   const router = useRouter()
   const { LOADING, UNAUTH } = statusAuth
   const [isLoading, setIsLoading] = useState(false)
+  const [category, setCategory] = useState("")
 
   useEffect(() => {
     if (status === UNAUTH) {
@@ -38,7 +47,7 @@ const Create = () => {
       await createRutine({
         name: values.name,
         frequency: values.frequency,
-        category: values.category,
+        category: category,
         identifier: data?.user?.email!,
       })
     },
@@ -72,17 +81,21 @@ const Create = () => {
           <div className="w-full h-full flex items-center justify-center flex-row">
             <div className="w-1/2 h-[86.7vh] flex items-center justify-center flex-col gap-4">
               <h1 className="text-white text-4xl font-normal">
-                Create your rutine
+                Crea tus rutinas
               </h1>
               <Formik
                 initialValues={{
                   name: "",
                   frequency: "",
-                  category: "",
                 }}
                 validationSchema={rutineSchema}
                 onSubmit={(values) => {
-                  handleSubmit(values)
+                  console.log(values)
+                  handleSubmit({
+                    name: values.name,
+                    frequency: values.frequency,
+                    category: category,
+                  })
                 }}
               >
                 {({ values, errors, touched }) => (
@@ -95,7 +108,7 @@ const Create = () => {
                         placeholder={
                           errors.name && touched.name
                             ? errors.name
-                            : "Nombre de la rutina..."
+                            : "Nombre... (ejemplo: Espalda y bicep)"
                         }
                         name="name"
                         value={values.name}
@@ -112,7 +125,7 @@ const Create = () => {
                         placeholder={
                           errors.frequency && touched.frequency
                             ? errors.frequency
-                            : "Frencuencia de la rutina..."
+                            : "Frencuencia... (ejemplo: 3 veces por semana)"
                         }
                         name="frequency"
                         value={values.frequency}
@@ -125,21 +138,25 @@ const Create = () => {
                       />
                     </div>
                     <div className="w-full h-max flex justify-center my-5">
-                      <Field
-                        placeholder={
-                          errors.category && touched.category
-                            ? errors.category
-                            : "Categoria..."
-                        }
-                        name="category"
-                        value={values.category}
-                        className={cn(
-                          "w-1/2 h-12 outline-none bg-transparent border-b-[2px] border-white focus:border-blue-700 transition-all duration-500 text-white",
-                          {
-                            "border-red": errors.category && touched.category,
-                          }
-                        )}
-                      />
+                      <Select onValueChange={(value) => setCategory(value)}>
+                        <SelectTrigger
+                          className={cn(
+                            "w-1/2 h-11 bg-transparent text-white border-[1px] border-gray-400 outline-none focus:border-[1px] focus:ring-0 focus:ring-transparent focus:border-gray-400"
+                          )}
+                        >
+                          <SelectValue placeholder="Elige una categoria" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-[#13131A] text-white font-semibold">
+                          <SelectGroup>
+                            <SelectLabel>Categoria</SelectLabel>
+                            <SelectItem value="musculacion">
+                              Musculacion
+                            </SelectItem>
+                            <SelectItem value="cardio">Cardio</SelectItem>
+                            <SelectItem value="salud">Saludable</SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
                     </div>
                     {isLoading ? (
                       <button

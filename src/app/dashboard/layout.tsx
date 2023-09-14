@@ -9,7 +9,6 @@ import { QueryClient, QueryClientProvider } from "react-query"
 export default function RootLayout({
   children,
   session,
-  modal,
 }: {
   children: React.ReactNode
   session: Session | null

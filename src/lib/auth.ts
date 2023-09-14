@@ -5,8 +5,6 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import Credentials from "next-auth/providers/credentials"
 import bcrypt from "bcrypt"
 import { User as UserModel } from "@prisma/client"
-import EmailProvider, { EmailConfig } from "next-auth/providers/email"
-import nodemailer from "nodemailer"
 
 declare module "next-auth" {
   interface User extends UserModel {
