@@ -21,7 +21,7 @@ const Card = () => {
   ]
 
   return (
-    <div className="w-full h-screen fixed bg-[#00000081] top-0 left-0 flex items-center justify-center">
+    <div className="w-full h-screen fixed bg-[#00000081] top-0 left-0 flex items-center justify-center z-20">
       <div className="w-[750px] h-[550px] bg-[#13131a] rounded flex items-center justify-start flex-col">
         <h1 className="text-white text-4xl font-normal mt-12 mb-4">Rutinas</h1>
         <h2 className="text-white text-2xl font-normal">

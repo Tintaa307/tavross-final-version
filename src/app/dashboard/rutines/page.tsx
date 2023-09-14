@@ -3,7 +3,7 @@
 import Loader from "@/components/shared/Loader"
 import { statusAuth } from "@/objects/status"
 import { useSession } from "next-auth/react"
-import { useEffect, useState } from "react"
+import { useEffect, useReducer, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useQuery, useQueryClient, useMutation } from "react-query"
 import { deleteRutine, getRutines } from "@/lib/controllers/rutines"
@@ -28,10 +28,33 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import toast, { Toaster } from "react-hot-toast"
 
+interface FilterProps {
+  type: string
+  category: string
+}
+
+const dispatchFilter = (
+  state: { name: string; category: string },
+  action: { type: "name" | "category"; payload: string }
+) => {
+  switch (action.type) {
+    case "name":
+      return { ...state, name: action.payload }
+    case "category":
+      return { ...state, category: action.payload }
+    default:
+      return state
+  }
+}
+
 const Rutines = () => {
   const { status, data: session } = useSession()
   const { LOADING, UNAUTH } = statusAuth
   const [loader, setIsLoading] = useState(false)
+  const [defaultFilter, reducer] = useReducer(dispatchFilter, {
+    name: "",
+    category: "todas",
+  })
   const router = useRouter()
 
   const queryClient = useQueryClient()
@@ -88,17 +111,11 @@ const Rutines = () => {
     },
   })
 
-  const [filteredRutines, setFilteredRutines] = useState<Rutine[]>(rutines)
+  const [filteredRutines, setFilteredRutines] = useState<Rutine[]>()
 
   useEffect(() => {
-    console.log(filteredRutines)
-  }, [filteredRutines])
-
-  const filterRutines = (filter: string) => {
-    setFilteredRutines(
-      rutines.filter((rutine: Rutine) => rutine.name.includes(filter))
-    )
-  }
+    if (rutines) setFilteredRutines(rutines)
+  }, [rutines])
 
   if (isLoading) return <Loader />
   else if (isError) console.log(error)
@@ -111,7 +128,7 @@ const Rutines = () => {
         <main className="w-full h-[86vh] flex items-center justify-center flex-col">
           <Toaster />
           <div className="w-full h-full flex items-center justify-center flex-col gap-12">
-            {filteredRutines?.length === 0 && <Card />}
+            {rutines?.length === 0 && <Card />}
             <div className="w-full h-max flex items-center justify-normal text-center flex-col gap-6">
               <h1 className="text-white font-semibold text-5xl mt-28">
                 Tus rutinas
@@ -134,18 +151,28 @@ const Rutines = () => {
                     type="text"
                     placeholder="Buscar rutina..."
                     className="w-72 h-11 bg-transparent border-[1px] border-gray-400 text-gray-400 text-base font-medium pl-10 rounded-md outline-none focus:outline-[3px] focus:outline-gray-500 transition-all duration-100"
-                    onChange={(e) => filterRutines(e.target.value)}
+                    onChange={(e) =>
+                      reducer({
+                        type: "name",
+                        payload: e.target.value as string,
+                      })
+                    }
                   />
                 </div>
-                <Select>
+                <Select
+                  defaultValue={"todas"}
+                  onValueChange={(value) =>
+                    reducer({ type: "category", payload: value })
+                  }
+                >
                   <SelectTrigger className="w-[180px] h-11 bg-transparent text-white border-[1px] border-gray-400 outline-none focus:border-[1px] focus:ring-0 focus:ring-transparent focus:border-gray-400 ">
                     <SelectValue placeholder="Elige una categoria" />
                   </SelectTrigger>
                   <SelectContent className="bg-[#13131A] text-white font-semibold">
                     <SelectGroup>
                       <SelectLabel>Categoria</SelectLabel>
-                      <SelectItem value="fuerza">Todas</SelectItem>
-                      <SelectItem value="fuerza">Musculacion</SelectItem>
+                      <SelectItem value="todas">Todas</SelectItem>
+                      <SelectItem value="musculacion">Musculacion</SelectItem>
                       <SelectItem value="cardio">Cardio</SelectItem>
                       <SelectItem value="salud">Saludable</SelectItem>
                     </SelectGroup>
@@ -166,7 +193,7 @@ const Rutines = () => {
                   }
                 )}
               >
-                {filteredRutines.map((rutine: Rutine) => {
+                {filteredRutines?.map((rutine: Rutine) => {
                   return (
                     <div
                       key={rutine.id}
