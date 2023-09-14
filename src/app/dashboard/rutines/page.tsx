@@ -18,15 +18,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
 
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import toast, { Toaster } from "react-hot-toast"
+import UserRutine from "./Rutine"
 
 interface FilterProps {
   type: string
@@ -50,7 +46,7 @@ const dispatchFilter = (
 const Rutines = () => {
   const { status, data: session } = useSession()
   const { LOADING, UNAUTH } = statusAuth
-  const [loader, setIsLoading] = useState(false)
+  const [filteredRutines, setFilteredRutines] = useState<Rutine[]>()
   const [defaultFilter, reducer] = useReducer(dispatchFilter, {
     name: "",
     category: "todas",
@@ -64,32 +60,6 @@ const Rutines = () => {
       router.push("/login")
     }
   }, [status])
-
-  const deleteRutineMutation = useMutation({
-    mutationKey: ["deleteRutine"],
-    mutationFn: async (rutineId: string) => {
-      await deleteRutine(rutineId)
-    },
-    onSuccess: () => {
-      toast.success("Rutine deleted")
-      router.push("/dashboard/rutines")
-      queryClient.invalidateQueries("rutines")
-    },
-    onError: () => {
-      toast.error("Error deleting")
-    },
-  })
-
-  const handleSubmit = async (rutineId: string) => {
-    setIsLoading(true)
-    try {
-      await deleteRutineMutation.mutateAsync(rutineId)
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
 
   const {
     data: rutines,
@@ -111,11 +81,21 @@ const Rutines = () => {
     },
   })
 
-  const [filteredRutines, setFilteredRutines] = useState<Rutine[]>()
+  const filterRutines = (rutines: Rutine[]) => {
+    return rutines.filter((rutine: Rutine) => {
+      return (
+        rutine.category === defaultFilter.category &&
+        rutine.name.includes(defaultFilter.name)
+      )
+    })
+  }
 
   useEffect(() => {
-    if (rutines) setFilteredRutines(rutines)
-  }, [rutines])
+    if (rutines.length > 0) {
+      const filter = filterRutines(rutines)
+      setFilteredRutines(filter)
+    }
+  }, [rutines, defaultFilter])
 
   if (isLoading) return <Loader />
   else if (isError) console.log(error)
@@ -195,73 +175,11 @@ const Rutines = () => {
               >
                 {filteredRutines?.map((rutine: Rutine) => {
                   return (
-                    <div
-                      key={rutine.id}
-                      className={cn(
-                        "w-full h-max flex items-center justify-between px-4 py-3 hover:bg-slate-400 hover:bg-opacity-20 transition-colors duration-200 ",
-                        {
-                          "border-b-[1px] border-gray-400":
-                            rutines.indexOf(rutine) !== rutines.length - 1,
-                        }
-                      )}
-                    >
-                      <div className="w-max h-max flex items-center justify-center flex-row gap-6">
-                        <div
-                          className={cn(
-                            "w-10 h-10 rounded-full flex items-center justify-center",
-                            {
-                              "bg-blue-600": rutine.category === "cardio",
-                              "bg-[#ff6b6b]": rutine.category === "musculacion",
-                              "bg-[#12b20e]": rutine.category === "salud",
-                            }
-                          )}
-                        >
-                          <i
-                            className={[
-                              cn({
-                                "ri-run-line": rutine.category === "cardio",
-                                "ri-boxing-fill":
-                                  rutine.category === "musculacion",
-                                "ri-mental-health-fill":
-                                  rutine.category === "salud",
-                              }),
-                              "text-white text-lg",
-                            ].join(" ")}
-                          />
-                        </div>
-                        <div className="flex justify-start items-start flex-col gap-1">
-                          <h2 className="text-white font-normal text-base">
-                            {rutine.name}
-                          </h2>
-                          <p className="text-gray-400 font-normal text-base">
-                            {rutine.category}
-                          </p>
-                        </div>
-                      </div>
-                      <div>
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <i
-                              className={[
-                                "ri-more-fill",
-                                "text-white text-xl cursor-pointer",
-                              ].join(" ")}
-                            />
-                          </PopoverTrigger>
-                          <PopoverContent className="w-max h-max bg-[#13131A]">
-                            <button
-                              onClick={() => {
-                                handleSubmit(rutine.id!)
-                                console.log(rutine.id)
-                              }}
-                              className="w-max h-max px-3 p-2 border-[1px] bg-transparent border-[#ee223b] rounded-md text-[#ee223b] font-semibold hover:bg-[#ee223b] transition-colors duration-200 hover:text-white"
-                            >
-                              Eliminar rutina
-                            </button>
-                          </PopoverContent>
-                        </Popover>
-                      </div>
-                    </div>
+                    <UserRutine
+                      key={rutine.id!}
+                      rutines={rutines}
+                      rutine={rutine}
+                    />
                   )
                 })}
               </div>
