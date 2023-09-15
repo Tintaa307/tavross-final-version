@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import prismadb from "@/lib/db"
+import { ExerciseListProps } from "@/types"
 
 export async function POST(req: Request) {
   if (req.method !== "POST")
@@ -8,21 +9,18 @@ export async function POST(req: Request) {
   try {
     const response = await req.json()
 
-    console.log(response)
+    const exerciseList = [] as ExerciseListProps[]
+
+    response.forEach((exercise: ExerciseListProps) => {
+      exerciseList.push(exercise)
+    })
 
     if (!response) {
       return NextResponse.json({ message: "Empty data" }, { status: 400 })
     }
 
-    const { name, weight, reps, rutineId } = response
-
-    const addExercises = await prismadb.rutineExercises.create({
-      data: {
-        name: name,
-        weight: weight,
-        reps: reps,
-        rutinesId: rutineId,
-      },
+    const addExercises = await prismadb.rutineExercises.createMany({
+      data: exerciseList,
     })
 
     console.log(addExercises)
@@ -36,6 +34,7 @@ export async function POST(req: Request) {
       { status: 200 }
     )
   } catch (error) {
+    console.log(error)
     return NextResponse.json(
       { message: "Internal server error" },
       { status: 500 }

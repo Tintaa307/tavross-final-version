@@ -1,8 +1,8 @@
 "use client"
 
 import Loader from "@/components/shared/Loader"
-import { getOneRutine } from "@/lib/controllers/rutines"
-import { Rutine } from "@/types"
+import { getRutineExercises } from "@/lib/controllers/exercises"
+import { ExerciseListProps } from "@/types"
 import { useSession } from "next-auth/react"
 import React, { useEffect } from "react"
 import { useQuery, QueryClient } from "react-query"
@@ -13,18 +13,18 @@ const Exercises = ({ params }: { params: { id: string } }) => {
   const { data: session } = useSession()
 
   const {
-    data: rutine,
+    data: exercises,
     isLoading,
     isError,
     error,
   } = useQuery({
-    queryKey: ["rutines"],
+    queryKey: ["exercises"],
     queryFn: async () => {
-      const rutines = await getOneRutine(id)
-      return rutines as Rutine
+      const exercises = await getRutineExercises(id)
+      return exercises as ExerciseListProps[]
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("rutines")
+      queryClient.invalidateQueries("exercises")
     },
     onError: () => {
       console.log("error")
@@ -47,9 +47,17 @@ const Exercises = ({ params }: { params: { id: string } }) => {
             Bienvenido, {session.user?.name}
           </h1>
           <p className="text-gray-400 text-base font-normal w-1/3">
-            Bienvenido a tu rutina {rutine?.name}, aqui podras agregarle
+            Aqui puedes ver tu rutina de entrenamiento, podrás agregarle
             ejercicios e ir cambiando los pesos y las repeticiones.
           </p>
+        </div>
+
+        <div>
+          {exercises?.map((exercise, index) => (
+            <div key={index}>
+              <h1 className="text-white">{exercise.name}</h1>
+            </div>
+          ))}
         </div>
       </main>
     </>

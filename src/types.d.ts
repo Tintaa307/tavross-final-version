@@ -46,7 +46,7 @@ export interface Rutine {
 
 export interface ExerciseListProps {
   name: string
-  weight: string
-  reps: string
-  rutineId?: string
+  weight: number
+  reps: number
+  rutinesId?: number
 }

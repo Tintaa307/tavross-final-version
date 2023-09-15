@@ -33,9 +33,24 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
       toast.error("Debe llenar todos los campos")
     } else {
       if (exercisesList?.length === 0) {
-        setExercisesList([values])
+        setExercisesList([
+          {
+            name: values.name,
+            weight: values.weight,
+            reps: values.reps,
+            rutinesId: Number(params.id),
+          },
+        ])
       } else {
-        setExercisesList([...exercisesList!, values])
+        setExercisesList([
+          ...exercisesList!,
+          {
+            name: values.name,
+            weight: values.weight,
+            reps: values.reps,
+            rutinesId: Number(params.id),
+          },
+        ])
       }
     }
   }
@@ -43,12 +58,7 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
   const addExercisesMutation = useMutation({
     mutationKey: ["deleteRutine"],
     mutationFn: async (list: ExerciseListProps[]) => {
-      list.map(async (exercise) => {
-        await addExercises({
-          ...exercise,
-          rutineId: params.id,
-        })
-      })
+      await addExercises([...list])
     },
     onSuccess: () => {
       toast.success("Exercises agregados")
@@ -155,7 +165,11 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
                     </div>
                     <motion.div
                       onClick={() => {
-                        handleExercises(values)
+                        handleExercises({
+                          name: values.name,
+                          weight: Number(values.weight),
+                          reps: Number(values.reps),
+                        })
                       }}
                       whileTap={{ scale: 0.9 }}
                       transition={{ duration: 0.5, type: "tween" }}
