@@ -71,7 +71,7 @@ const Rutines = () => {
     enabled: !!session?.user?.email,
     queryFn: async () => {
       const rutines = await getRutines(session?.user?.email!)
-      return rutines
+      return rutines as Rutine[]
     },
     onSuccess: () => {
       queryClient.invalidateQueries("rutines")
@@ -80,22 +80,6 @@ const Rutines = () => {
       console.log("error")
     },
   })
-
-  const filterRutines = (rutines: Rutine[]) => {
-    return rutines.filter((rutine: Rutine) => {
-      return (
-        rutine.category === defaultFilter.category &&
-        rutine.name.includes(defaultFilter.name)
-      )
-    })
-  }
-
-  useEffect(() => {
-    if (rutines.length > 0) {
-      const filter = filterRutines(rutines)
-      setFilteredRutines(filter)
-    }
-  }, [rutines, defaultFilter])
 
   if (isLoading) return <Loader />
   else if (isError) console.log(error)
@@ -169,11 +153,11 @@ const Rutines = () => {
                 className={cn(
                   "w-[660px] h-[max] flex items-center justify-center flex-col border-gray-400 border-[1px] rounded-md mb-6",
                   {
-                    "overflow-y-scroll max-h-[600px]": rutines.length > 7,
+                    "overflow-y-scroll max-h-[600px]": rutines!.length > 7,
                   }
                 )}
               >
-                {filteredRutines?.map((rutine: Rutine) => {
+                {rutines?.map((rutine) => {
                   return (
                     <UserRutine
                       key={rutine.id!}

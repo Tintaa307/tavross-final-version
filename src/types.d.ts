@@ -43,3 +43,10 @@ export interface Rutine {
   category: string
   identifier?: string
 }
+
+export interface ExerciseListProps {
+  name: string
+  weight: string
+  reps: string
+  rutineId?: string
+}

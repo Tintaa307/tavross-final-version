@@ -50,8 +50,9 @@ const UserRutine = ({ key, rutine, rutines }: UserRutineProps) => {
   }
   return (
     <div
+      onClick={() => router.push(`/dashboard/rutines/${rutine.id}`)}
       className={cn(
-        "w-full h-max flex items-center justify-between px-4 py-3 hover:bg-slate-400 hover:bg-opacity-20 transition-colors duration-200 ",
+        "w-full h-max flex items-center justify-between px-4 py-3 hover:bg-slate-400 hover:bg-opacity-20 transition-colors duration-200 cursor-pointer",
         {
           "border-b-[1px] border-gray-400":
             rutines.indexOf(rutine) !== rutines.length - 1,
