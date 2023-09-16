@@ -71,7 +71,7 @@ const Nav = () => {
     },
     {
       name: "Your rutines",
-      path: "/dashboard/rutinas",
+      path: "/dashboard/rutines",
       icon: "ri-table-line",
     },
     {
@@ -81,12 +81,12 @@ const Nav = () => {
     },
     {
       name: "Progress",
-      path: "/dashboard/progreso",
+      path: "/dashboard/progress",
       icon: "ri-bar-chart-2-line",
     },
     {
       name: "Contact",
-      path: "/dashboard/contacto",
+      path: "/dashboard/contact",
       icon: "ri-phone-line",
     },
   ]
@@ -129,6 +129,7 @@ const Nav = () => {
           <ul className="mt-12 w-full h-max flex items-center justify-center flex-col">
             {navItems.map((item, index) => (
               <li
+                onClick={() => router.push(item.path)}
                 className="w-4/5 h-11 flex items-center justify-start hover:bg-[#ffffff2c] rounded-lg my-2 transition-all cursor-pointer"
                 key={index}
               >

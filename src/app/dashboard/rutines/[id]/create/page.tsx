@@ -55,6 +55,11 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
     }
   }
 
+  const handleDelete = (name: string) => {
+    const newList = exercisesList?.filter((exercise) => exercise.name !== name)
+    setExercisesList([...newList!])
+  }
+
   const addExercisesMutation = useMutation({
     mutationKey: ["deleteRutine"],
     mutationFn: async (list: ExerciseListProps[]) => {
@@ -181,7 +186,7 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
                       isLoading ? (
                         <button
                           type="submit"
-                          className="w-1/2 h-12 flex items-center justify-center px-4 rounded bg-transparent text-white mb-5 border-[1px] border-blue-800"
+                          className="w-1/2 h-12 mt-4 flex items-center justify-center px-4 rounded bg-transparent text-white mb-5 border-[1px] border-blue-800"
                         >
                           <div className="w-6 h-6 rounded-full border-2 border-solid border-blue-500 border-l-transparent bg-transparent animate-spin" />
                         </button>
@@ -203,6 +208,7 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
             <div className="w-1/2 h-full flex items-start justify-center flex-col gap-4">
               {exercisesList?.map((exercise, index) => (
                 <motion.div
+                  onClick={() => handleDelete(exercise.name)}
                   initial={{ scale: 0.9 }}
                   whileInView={{ scale: 1 }}
                   transition={{ duration: 0.5, type: "tween" }}

@@ -6,6 +6,9 @@ import { ExerciseListProps } from "@/types"
 import { useSession } from "next-auth/react"
 import React, { useEffect } from "react"
 import { useQuery, QueryClient } from "react-query"
+import Message from "./Message"
+import Exercise from "./Exercise"
+import Link from "next/link"
 
 const Exercises = ({ params }: { params: { id: string } }) => {
   const { id } = params
@@ -41,7 +44,7 @@ const Exercises = ({ params }: { params: { id: string } }) => {
 
   return (
     <>
-      <main className="w-full h-full flex items-center justify-center flex-col">
+      <main className="w-full h-full flex items-center justify-center flex-col gap-24">
         <div className="w-full h-full flex items-center justify-center text-center flex-col gap-5">
           <h1 className="text-3xl font-bold text-white">
             Bienvenido, {session.user?.name}
@@ -50,13 +53,20 @@ const Exercises = ({ params }: { params: { id: string } }) => {
             Aqui puedes ver tu rutina de entrenamiento, podrás agregarle
             ejercicios e ir cambiando los pesos y las repeticiones.
           </p>
+          <small className="text-white font-normal text-lg">
+            Puedes agregar mas ejercicios{" "}
+            <Link
+              href={`/dashboard/rutines/${id}/create`}
+              className="text-blue-600 underline underline-blue-600"
+            >
+              aquí
+            </Link>
+          </small>
         </div>
-
-        <div>
+        {exercises?.length === 0 && <Message params={id} />}
+        <div className="w-full h-full flex items-center justify-center flex-row gap-5">
           {exercises?.map((exercise, index) => (
-            <div key={index}>
-              <h1 className="text-white">{exercise.name}</h1>
-            </div>
+            <Exercise key={index} exercise={exercise} />
           ))}
         </div>
       </main>
