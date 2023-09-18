@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import { signOut, useSession } from "next-auth/react"
-import Image from "next/image"
-import { useRouter } from "next/navigation"
-import React, { useEffect, useState } from "react"
-import "remixicon/fonts/remixicon.css"
-import { Variants, motion } from "framer-motion"
-import { cn } from "@/lib/utils"
+import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import "remixicon/fonts/remixicon.css";
+import { Variants, motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const variants: Variants = {
   open: {
@@ -25,7 +25,7 @@ const variants: Variants = {
       type: "tween",
     },
   },
-}
+};
 
 const iconVariants: Variants = {
   open: {
@@ -44,24 +44,24 @@ const iconVariants: Variants = {
       type: "tween",
     },
   },
-}
+};
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(
     "-translate-x-[400px] transition duration-950"
-  )
-  const { data: session, status } = useSession()
-  const router = useRouter()
-  const [userImage, setUserImage] = useState("")
-  const [openState, setOpenState] = useState(false)
+  );
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const [userImage, setUserImage] = useState("");
+  const [openState, setOpenState] = useState(false);
 
   useEffect(() => {
     if (session) {
       if (session?.user?.image) {
-        setUserImage(session?.user?.image.toString()!)
+        setUserImage(session?.user?.image.toString()!);
       }
     }
-  }, [session])
+  }, [session]);
 
   const navItems = [
     {
@@ -76,7 +76,7 @@ const Nav = () => {
     },
     {
       name: "Your RM",
-      path: "/dashboard/rm",
+      path: "/dashboard/calculator",
       icon: "ri-calculator-line",
     },
     {
@@ -89,12 +89,12 @@ const Nav = () => {
       path: "/dashboard/contact",
       icon: "ri-phone-line",
     },
-  ]
+  ];
   const handleOpen = () => {
     isOpen === "-translate-x-[400px] transition duration-1000"
       ? setIsOpen("translate-x-0 transition duration-1000")
-      : setIsOpen("-translate-x-[400px] transition duration-1000")
-  }
+      : setIsOpen("-translate-x-[400px] transition duration-1000");
+  };
 
   return (
     <header className="relative top-0 left-0 w-full h-20">
@@ -249,7 +249,7 @@ const Nav = () => {
         )}
       </nav>
     </header>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;
