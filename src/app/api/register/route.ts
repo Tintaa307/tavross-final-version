@@ -85,7 +85,7 @@ export async function POST(req: Request) {
               Welcome to <span style={{ color: "#0ea5e9" }}> Tavross!🦾</span>
             </h1>
             <p style={{ fontSize: "0.875rem", color: "#ffffff57" textAlign: "center" }}>Please confirm your email to finish creating your account.</p>
-            <a href="http://localhost:3000/verify/${token}" style={{
+            <a href="https://tavross-final-version.vercel.app/verify/${token}" style={{
               fontSize: "0.955rem",
               color: "#ffffff",
               borderRadius: "10px",
