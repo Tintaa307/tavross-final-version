@@ -95,7 +95,7 @@ const Calculator = () => {
 
   return (
     <section className="calculator">
-      <h1 className="title">RM Calculator</h1>
+      <h1 className="title">Calculadora de RM</h1>
       <div className="calculator-content">
         <form
           onSubmit={submit}
@@ -135,7 +135,7 @@ const Calculator = () => {
                     Peso Levantado
                   </TableHead>
                   <TableHead className="w-[200px] text-white font-semibold text-xl">
-                    Repeticiones de RM
+                    Repeticiones Maximas
                   </TableHead>
                 </TableRow>
               </TableHeader>
