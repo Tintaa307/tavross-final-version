@@ -198,8 +198,7 @@ const Rutines = () => {
                       )
                     })
                     .filter((rutine) => {
-                      if (defaultFilter.name === "") return rutine
-                      else if (
+                      if (
                         rutine.props.rutine.name
                           .toLowerCase()
                           .includes(defaultFilter.name.toLowerCase())
