@@ -152,22 +152,25 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
                       />
                     </div>
                     <div className="w-full h-max flex justify-center my-5">
-                      <Field
-                        placeholder={
-                          errors.weight && touched.weight
-                            ? errors.weight
-                            : "Peso..."
-                        }
-                        name="weight"
-                        type="number"
-                        value={values.weight}
-                        className={cn(
-                          "w-1/2 h-12 outline-none bg-transparent border-b-[2px] border-white focus:border-blue-700 transition-all duration-500 text-white",
-                          {
-                            "border-[#ff6b6b]": errors.weight && touched.weight,
+                      {rutine?.category === "cardio" ? null : (
+                        <Field
+                          placeholder={
+                            errors.weight && touched.weight
+                              ? errors.weight
+                              : "Peso..."
                           }
-                        )}
-                      />
+                          name="weight"
+                          type="number"
+                          value={values.weight}
+                          className={cn(
+                            "w-1/2 h-12 outline-none bg-transparent border-b-[2px] border-white focus:border-blue-700 transition-all duration-500 text-white",
+                            {
+                              "border-[#ff6b6b]":
+                                errors.weight && touched.weight,
+                            }
+                          )}
+                        />
+                      )}
                     </div>
                     <div className="w-full h-max flex justify-center my-5">
                       <Field
