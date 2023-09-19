@@ -159,8 +159,8 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
                         )}
                       />
                     </div>
-                    <div className="w-full h-max flex justify-center my-5">
-                      {rutine?.category === "cardio" ? null : (
+                    {rutine?.category === "cardio" ? null : (
+                      <div className="w-full h-max flex justify-center my-5">
                         <Field
                           placeholder={
                             errors.weight && touched.weight
@@ -178,8 +178,8 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
                             }
                           )}
                         />
-                      )}
-                    </div>
+                      </div>
+                    )}
                     <div className="w-full h-max flex justify-center my-5">
                       <Field
                         type="number"
