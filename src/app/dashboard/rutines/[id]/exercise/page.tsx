@@ -7,9 +7,9 @@ const page = () => {
       <Model
         url={"ANIMACION_TRICEP"}
         cameraPosition={{
-          x: 0.17,
-          y: 0.17,
-          z: 0.4,
+          x: 0.2,
+          y: 0.2,
+          z: 0.8,
         }}
       />
     </div>
