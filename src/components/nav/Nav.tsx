@@ -136,7 +136,9 @@ const Nav = () => {
               <li
                 onClick={() => {
                   router.push(item.path)
-                  setIsOpen("-translate-x-[400px] transition duration-950")
+                  setIsOpen(
+                    "-translate-x-[400px] transition duration-1000 delay-200"
+                  )
                 }}
                 className="w-4/5 h-11 flex items-center justify-start hover:bg-[#ffffff2c] rounded-lg my-2 transition-all cursor-pointer"
                 key={index}
