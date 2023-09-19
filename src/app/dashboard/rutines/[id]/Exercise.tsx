@@ -18,6 +18,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { useRouter } from "next/navigation"
 
 interface ExerciseProps {
   exercise: ExerciseListProps
@@ -32,6 +33,7 @@ const Exercise = ({ exercise, rutineId }: ExerciseProps) => {
   const [isEditing, setIsEditing] = useState(false)
   const [newWeight, setNewWeight] = useState(exercise.weight.toString())
   const [newReps, setNewReps] = useState(exercise.reps.toString())
+  const router = useRouter()
   const queryClient = new QueryClient()
 
   const updateExerciseMutation = useMutation({
@@ -83,7 +85,14 @@ const Exercise = ({ exercise, rutineId }: ExerciseProps) => {
   }
 
   return (
-    <div className="w-[320px] h-[440px] bg-[#1d1c20] border-[1px] border-gray-700 rounded-md flex items-center justify-center text-center flex-col gap-5">
+    <div
+      onClick={() =>
+        router.push(
+          "/https://tavross-final-version.vercel.app/dashboard/rutines/25/exercise"
+        )
+      }
+      className="w-[320px] h-[440px] bg-[#1d1c20] border-[1px] border-gray-700 rounded-md flex items-center justify-center text-center flex-col gap-5"
+    >
       <Toaster />
       <h2 className="text-white font-semibold text-[26px]">{exercise.name}</h2>
       <p className="text-base text-gray-400 font-normal px-3">
