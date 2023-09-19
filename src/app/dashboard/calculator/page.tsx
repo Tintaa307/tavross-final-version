@@ -11,7 +11,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { object } from "zod"
 
 const Calculator = () => {
   const [data, setData] = useState({
@@ -145,7 +144,7 @@ const Calculator = () => {
                   <TableRow key={index}>
                     <TableCell className="text-gray-400 ">{item.lvl}</TableCell>
                     <TableCell className="text-gray-400 ">
-                      {Math.ceil(item.calc)}kg
+                      {Math.floor(item.calc)}kg
                     </TableCell>
                     <TableCell className="text-gray-400 ">
                       {item.reps}

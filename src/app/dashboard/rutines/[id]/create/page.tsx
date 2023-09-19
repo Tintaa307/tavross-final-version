@@ -9,10 +9,11 @@ import { motion } from "framer-motion"
 import { useSession } from "next-auth/react"
 import { statusAuth } from "@/objects/status"
 import Loader from "@/components/shared/Loader"
-import { ExerciseListProps } from "@/types"
-import { useMutation, useQueryClient } from "react-query"
+import { ExerciseListProps, Rutine } from "@/types"
+import { useMutation, useQuery, useQueryClient } from "react-query"
 import { addExercises } from "@/lib/controllers/exercises"
 import { useRouter } from "next/navigation"
+import { getOneRutine } from "@/lib/controllers/rutines"
 
 const exerciseSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
@@ -72,6 +73,24 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
     },
     onError: () => {
       toast.error("Error agregando ejercicios")
+    },
+  })
+
+  const {
+    data: rutine,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["rutine"],
+    queryFn: async () => {
+      const rutine = await getOneRutine(params.id)
+      return rutine as Rutine
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("exercises")
+    },
+    onError: () => {
+      console.log("error")
     },
   })
 
@@ -156,6 +175,8 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
                         placeholder={
                           errors.reps && touched.reps
                             ? errors.reps
+                            : rutine?.category === "cardio"
+                            ? "Minutos..."
                             : "Repeticiones..."
                         }
                         name="reps"
