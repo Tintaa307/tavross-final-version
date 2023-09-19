@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import React, { ChangeEvent, use, useEffect, useState } from "react";
-import "./Calculator.css";
+import React, { ChangeEvent, use, useEffect, useState } from "react"
+import "./Calculator.css"
 import {
   Table,
   TableBody,
@@ -10,17 +10,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { object } from "zod";
+} from "@/components/ui/table"
+import { object } from "zod"
 
 const Calculator = () => {
   const [data, setData] = useState({
     reps: "",
     weight: "",
-  });
+  })
 
   const calcRM =
-    0.0333 * Number(data.weight) * Number(data.reps) + Number(data.weight);
+    0.0333 * Number(data.weight) * Number(data.reps) + Number(data.weight)
 
   const lvlRM = [
     {
@@ -78,21 +78,21 @@ const Calculator = () => {
       calc: calcRM * 0.5,
       reps: "30",
     },
-  ];
+  ]
 
   useEffect(() => {
-    console.log(data);
-  });
+    console.log(data)
+  })
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const values = Object.fromEntries(formData.entries());
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const values = Object.fromEntries(formData.entries())
     setData({
       reps: values.reps.toString(),
       weight: values.weight.toString(),
-    });
-  };
+    })
+  }
 
   return (
     <section className="calculator">
@@ -109,17 +109,18 @@ const Calculator = () => {
           <input
             type="text"
             className="w-72 h-11 bg-transparent border-[1px] border-gray-400 text-gray-400 text-base font-medium pl-3 rounded-md outline-none focus:outline-[3px] focus:outline-gray-500 transition-all duration-100"
-            name="reps"
-            placeholder="Repeticiones..."
-          />
-          <input
-            type="text"
-            className="w-72 h-11 bg-transparent border-[1px] border-gray-400 text-gray-400 text-base font-medium pl-3 rounded-md outline-none focus:outline-[3px] focus:outline-gray-500 transition-all duration-100"
             name="weight"
             placeholder="Peso..."
           />
           <input
+            type="text"
+            className="w-72 h-11 bg-transparent border-[1px] border-gray-400 text-gray-400 text-base font-medium pl-3 rounded-md outline-none focus:outline-[3px] focus:outline-gray-500 transition-all duration-100"
+            name="reps"
+            placeholder="Repeticiones..."
+          />
+          <input
             type="submit"
+            placeholder="Calcular"
             className="w-44 h-11 bg-white flex items-center justify-center hover:bg-gray-300 transition-colors duration-200 text-black rounded-md font-semibold outline-none"
           />
         </form>
@@ -157,7 +158,7 @@ const Calculator = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Calculator;
+export default Calculator
