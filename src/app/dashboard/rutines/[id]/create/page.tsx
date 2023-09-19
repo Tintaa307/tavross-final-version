@@ -62,7 +62,7 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
   }
 
   const addExercisesMutation = useMutation({
-    mutationKey: ["deleteRutine"],
+    mutationKey: ["addExercises"],
     mutationFn: async (list: ExerciseListProps[]) => {
       await addExercises([...list])
     },
