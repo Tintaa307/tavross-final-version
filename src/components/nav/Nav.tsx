@@ -134,7 +134,10 @@ const Nav = () => {
           <ul className="mt-12 w-full h-max flex items-center justify-center flex-col">
             {navItems.map((item, index) => (
               <li
-                onClick={() => router.push(item.path)}
+                onClick={() => {
+                  router.push(item.path)
+                  setIsOpen("-translate-x-[400px] transition duration-950")
+                }}
                 className="w-4/5 h-11 flex items-center justify-start hover:bg-[#ffffff2c] rounded-lg my-2 transition-all cursor-pointer"
                 key={index}
               >
