@@ -135,7 +135,7 @@ const Rutines = () => {
                   </SelectTrigger>
                   <SelectContent className="bg-[#13131A] text-white font-semibold">
                     <SelectGroup>
-                      <SelectLabel className="bg-[#111111] text-gray-300">
+                      <SelectLabel className="bg-[#000] text-gray-300">
                         Categoria
                       </SelectLabel>
                       <SelectItem value="todas">Todas</SelectItem>
