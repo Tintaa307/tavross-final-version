@@ -101,7 +101,7 @@ const UserRutine = ({ key, rutine, rutines }: UserRutineProps) => {
       </div>
       <div>
         <AlertDialog>
-          <AlertDialogTrigger>
+          <AlertDialogTrigger asChild>
             <div
               onClick={(e) => e.isPropagationStopped()}
               className="w-max h-max z-20 hover:bg-slate-400 rounded-md transition-all duration-200"
