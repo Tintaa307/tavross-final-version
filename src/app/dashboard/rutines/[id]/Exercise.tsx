@@ -3,10 +3,10 @@ import {
   updateRutineExercises,
 } from "@/lib/controllers/exercises"
 import { cn } from "@/lib/utils"
-import { ExerciseListProps } from "@/types"
+import { ExerciseListProps, Rutine } from "@/types"
 import React, { useState } from "react"
 import toast, { Toaster } from "react-hot-toast"
-import { useMutation, QueryClient } from "react-query"
+import { useMutation, QueryClient, useQuery } from "react-query"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,6 +19,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { useRouter } from "next/navigation"
+import { getOneRutine } from "@/lib/controllers/rutines"
 
 interface ExerciseProps {
   exercise: ExerciseListProps
@@ -76,6 +77,20 @@ const Exercise = ({ exercise, rutineId }: ExerciseProps) => {
     }
   }
 
+  const { data: rutine } = useQuery({
+    queryKey: ["rutine"],
+    queryFn: async () => {
+      const rutine = await getOneRutine(rutineId)
+      return rutine as Rutine
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("exercises")
+    },
+    onError: () => {
+      console.log("error")
+    },
+  })
+
   const handleDelete = async () => {
     try {
       await deleteExerciseMutation.mutateAsync()
@@ -108,7 +123,9 @@ const Exercise = ({ exercise, rutineId }: ExerciseProps) => {
           />
         </div>
         <div className="flex flex-row gap-3 mx-6">
-          <h4 className="text-white font-normal text-lg">Repeticiones: </h4>
+          <h4 className="text-white font-normal text-lg">
+            {rutine?.category === "cardio" ? "Minutos: " : "Repeticiones: "}
+          </h4>
           <input
             type="number"
             value={isEditing ? newReps : exercise.reps}
