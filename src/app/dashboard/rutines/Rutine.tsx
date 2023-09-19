@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import {
   Popover,
@@ -11,6 +11,17 @@ import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
 import { Rutine } from "@/types"
 import { cn } from "@/lib/utils"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 interface UserRutineProps {
   key: string
@@ -89,27 +100,50 @@ const UserRutine = ({ key, rutine, rutines }: UserRutineProps) => {
         </div>
       </div>
       <div>
-        <Popover>
-          <PopoverTrigger asChild>
-            <i
-              className={[
-                "ri-more-fill",
-                "text-white text-xl cursor-pointer",
-              ].join(" ")}
-            />
-          </PopoverTrigger>
-          <PopoverContent className="w-max h-max bg-[#13131A]">
-            <button
-              onClick={() => {
-                handleSubmit(rutine.id!)
-                console.log(rutine.id)
-              }}
-              className="w-max h-max px-3 p-2 border-[1px] bg-transparent border-[#ee223b] rounded-md text-[#ee223b] font-semibold hover:bg-[#ee223b] transition-colors duration-200 hover:text-white"
-            >
-              Eliminar rutina
-            </button>
-          </PopoverContent>
-        </Popover>
+        <AlertDialog>
+          <AlertDialogTrigger>
+            <Popover>
+              <PopoverTrigger asChild>
+                <i
+                  className={[
+                    "ri-more-fill",
+                    "text-white text-xl cursor-pointer",
+                  ].join(" ")}
+                />
+              </PopoverTrigger>
+              <PopoverContent className="w-max h-max bg-[#13131A]">
+                <button className="w-max h-max px-3 p-2 border-[1px] bg-transparent border-[#ee223b] rounded-md text-[#ee223b] font-semibold hover:bg-[#ee223b] transition-colors duration-200 hover:text-white">
+                  Eliminar rutina
+                </button>
+              </PopoverContent>
+            </Popover>
+          </AlertDialogTrigger>
+          <AlertDialogContent className="bg-[#13131A] border-[1px] border-gray-700">
+            <AlertDialogHeader>
+              <AlertDialogTitle className="text-white">
+                Estas seguro de esto?
+              </AlertDialogTitle>
+              <AlertDialogDescription>
+                Esta accion no se puede deshacer. Este ejercicio sera eliminado
+                permanentemente.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel className="hover:bg-[#eeeeeeb6] transition-colors duration-200">
+                Cancelar
+              </AlertDialogCancel>
+              <AlertDialogAction
+                className="bg-[#ee223b] hover:bg-[#ee223a75] transition-colors duration-200"
+                onClick={() => {
+                  handleSubmit(rutine.id!)
+                  console.log(rutine.id)
+                }}
+              >
+                Eliminar
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>{" "}
       </div>
     </div>
   )

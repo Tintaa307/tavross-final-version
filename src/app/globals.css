@@ -85,5 +85,6 @@
   }
   body {
     background-color: #13131a;
+    overflow-x: hidden;
   }
 }

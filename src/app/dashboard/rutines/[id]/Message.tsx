@@ -24,7 +24,7 @@ const Message = ({ params }: MessageProps) => {
         <div className="w-[80%] h-[1px] my-6 bg-gray-400 flex items-center justify-center"></div>
         <Link
           className="text-white font-semibold flex items-center justify-center text-lg rounded-md bg-transparent border-2 border-blue-600 py-3 px-16 hover:bg-blue-600 transition-colors duration-200"
-          href={`dashboard/rutines/`}
+          href={`/dashboard/rutines/`}
         >
           Volver
         </Link>

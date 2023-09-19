@@ -1,21 +1,63 @@
+import { updateRutineExercises } from "@/lib/controllers/exercises"
 import { cn } from "@/lib/utils"
 import { ExerciseListProps } from "@/types"
 import React, { useState } from "react"
+import toast, { Toaster } from "react-hot-toast"
+import { useMutation, QueryClient } from "react-query"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 interface ExerciseProps {
   exercise: ExerciseListProps
+  rutineId: string
 }
 
-const Exercise = ({ exercise }: ExerciseProps) => {
+const Exercise = ({ exercise, rutineId }: ExerciseProps) => {
   const [isEditing, setIsEditing] = useState(false)
   const [newWeight, setNewWeight] = useState(exercise.weight.toString())
   const [newReps, setNewReps] = useState(exercise.reps.toString())
+  const queryClient = new QueryClient()
 
-  const handleEdit = (exerciseName: string) => {}
-  const handleDelete = (exerciseName: string) => {}
+  const updateExerciseMutation = useMutation({
+    mutationKey: ["updateExercise"],
+    mutationFn: async (values: ExerciseListProps) => {
+      await updateRutineExercises(rutineId, {
+        name: values.name,
+        weight: Number(newWeight),
+        reps: Number(newReps),
+      })
+    },
+    onSuccess: () => {
+      toast.success("Exercise updated")
+      queryClient.invalidateQueries("exercises")
+    },
+    onError: () => {
+      toast.error("Error updating exercise")
+    },
+  })
+
+  const handleEdit = async (exercise: ExerciseListProps) => {
+    try {
+      await updateExerciseMutation.mutateAsync(exercise)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleDelete = (exercise: ExerciseListProps) => {}
 
   return (
     <div className="w-[320px] h-[440px] bg-[#1d1c20] border-[1px] border-gray-700 rounded-md flex items-center justify-center text-center flex-col gap-5">
+      <Toaster />
       <h2 className="text-white font-semibold text-[26px]">{exercise.name}</h2>
       <p className="text-base text-gray-400 font-normal px-3">
         Aqui puedes ver los datos de tus ejercicios y modificarlos.
@@ -57,7 +99,7 @@ const Exercise = ({ exercise }: ExerciseProps) => {
           <button
             onClick={() => {
               setIsEditing(!isEditing)
-              isEditing ? handleEdit(exercise.name) : null
+              isEditing ? handleEdit(exercise) : null
             }}
             className="w-[120px] h-11 bg-blue-600 text-white font-semibold text-lg rounded-sm hover:bg-blue-800 transition-colors duration-200"
           >
@@ -65,14 +107,35 @@ const Exercise = ({ exercise }: ExerciseProps) => {
           </button>
         </div>
         <div>
-          <button
-            onClick={() => {
-              isEditing ? setIsEditing(false) : handleDelete(exercise.name)
-            }}
-            className="w-[120px] h-11 bg-[#ee223b] text-white font-semibold text-lg rounded-sm hover:bg-[#ee223a75] transition-colors duration-200"
-          >
-            {isEditing ? "Cancelar" : "Eliminar"}
-          </button>
+          <AlertDialog>
+            <AlertDialogTrigger>
+              <button className="w-[120px] h-11 bg-[#ee223b] text-white font-semibold text-lg rounded-sm hover:bg-[#ee223a75] transition-colors duration-200">
+                Eliminar
+              </button>
+            </AlertDialogTrigger>
+            <AlertDialogContent className="bg-[#13131A] border-[1px] border-gray-700">
+              <AlertDialogHeader>
+                <AlertDialogTitle className="text-white">
+                  Estas seguro de esto?
+                </AlertDialogTitle>
+                <AlertDialogDescription>
+                  Esta accion no se puede deshacer. Este ejercicio sera
+                  eliminado permanentemente.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel className="hover:bg-[#eeeeeeb6] transition-colors duration-200">
+                  Cancelar
+                </AlertDialogCancel>
+                <AlertDialogAction
+                  className="bg-[#ee223b] hover:bg-[#ee223a75] transition-colors duration-200"
+                  onClick={() => handleDelete(exercise)}
+                >
+                  Eliminar
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
       </div>
     </div>

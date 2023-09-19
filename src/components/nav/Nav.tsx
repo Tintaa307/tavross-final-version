@@ -63,29 +63,33 @@ const Nav = () => {
     }
   }, [session])
 
+  const handleBlur = () => {
+    setIsOpen("-translate-x-[400px] transition duration-950")
+  }
+
   const navItems = [
     {
-      name: "Home",
+      name: "Dashboard",
       path: "/dashboard",
       icon: "ri-home-line",
     },
     {
-      name: "Your rutines",
+      name: "Tus rutinas",
       path: "/dashboard/rutines",
       icon: "ri-table-line",
     },
     {
-      name: "Your RM",
+      name: "Calculadora RM",
       path: "/dashboard/rm",
       icon: "ri-calculator-line",
     },
     {
-      name: "Progress",
+      name: "Progreso",
       path: "/dashboard/progress",
       icon: "ri-bar-chart-2-line",
     },
     {
-      name: "Contact",
+      name: "Contacto",
       path: "/dashboard/contact",
       icon: "ri-phone-line",
     },
@@ -113,6 +117,7 @@ const Nav = () => {
             "fixed top-0 left-0 w-80 h-screen bg-[#1f1f2e] rounded-r-2xl z-40",
             isOpen,
           ].join(" ")}
+          onBlur={handleBlur}
         >
           <div className="absolute right-6 top-6 w-8 h-8 hover:bg-[#ffffff2b] flex items-center justify-center rounded-lg">
             <i
@@ -153,16 +158,18 @@ const Nav = () => {
                   height={35}
                 />
               ) : (
-                <div className="w-14 h-14 mx-4 cursor-pointer bg-transparent border-2 border-blue-500 rounded-full flex items-center justify-center">
-                  <i className="ri-user-line text-white text-2xl" />
+                <div className="w-11 h-11 mx-4 cursor-pointer bg-gray-600 rounded-full flex items-center justify-center text-white font-semibold text-xl">
+                  T
                 </div>
               )}
-              <div className="flex flex-col">
+              <div className="w-1/2 flex flex-col">
                 <h4 className="text-white font-normal text-sm">
                   {session?.user?.name}
                 </h4>
-                <small className="text-[#ffffff57] text-xs">
-                  {session?.user?.email}
+                <small className="text-[#ffffff57] text-xs w-1/2">
+                  {session.user?.email?.length! > 25
+                    ? session?.user?.email?.split("@")[0].concat("...")
+                    : session?.user?.email}
                 </small>
               </div>
               <button
@@ -210,40 +217,9 @@ const Nav = () => {
         ) : (
           <article className="absolute top-5 right-12 flex flex-row">
             <div onClick={() => setOpenState(!openState)} className="">
-              <Image
-                src={userImage}
-                alt="user-image"
-                className="rounded-full cursor-pointer"
-                width={45}
-                height={45}
-              />
-              <motion.div
-                initial={"closed"}
-                variants={variants}
-                animate={openState ? "open" : "closed"}
-                className="absolute flex items-center justify-center top-8 right-0 bg-[#1f1f2e] rounded-lg z-40"
-              >
-                <motion.i
-                  initial={"closed"}
-                  variants={iconVariants}
-                  animate={openState ? "open" : "closed"}
-                  className={cn(
-                    "ri-arrow-down-s-line",
-                    "text-white text-xs rounded cursor-pointer",
-                    openState ? "hidden" : "block"
-                  )}
-                />
-                <motion.i
-                  initial={"closed"}
-                  variants={iconVariants}
-                  animate={openState ? "open" : "closed"}
-                  className={cn(
-                    "ri-close-line",
-                    "text-white text-xl rounded cursor-pointer",
-                    openState ? "block" : "hidden"
-                  )}
-                />
-              </motion.div>
+              <div className="w-11 h-11 bg-slate-600 rounded-full text-white text-xl font-bold flex items-center justify-center cursor-pointer">
+                T
+              </div>
             </div>
           </article>
         )}

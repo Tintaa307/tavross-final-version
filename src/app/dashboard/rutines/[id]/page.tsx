@@ -66,7 +66,7 @@ const Exercises = ({ params }: { params: { id: string } }) => {
         {exercises?.length === 0 && <Message params={id} />}
         <div className="w-full h-full flex items-center justify-center flex-row gap-5">
           {exercises?.map((exercise, index) => (
-            <Exercise key={index} exercise={exercise} />
+            <Exercise key={index} exercise={exercise} rutineId={id} />
           ))}
         </div>
       </main>

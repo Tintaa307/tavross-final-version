@@ -23,6 +23,7 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import toast, { Toaster } from "react-hot-toast"
 import UserRutine from "./Rutine"
+import Empty from "@/components/empty/Empty"
 
 interface FilterProps {
   type: string
@@ -92,7 +93,7 @@ const Rutines = () => {
         <main className="w-full h-[86vh] flex items-center justify-center flex-col">
           <Toaster />
           <div className="w-full h-full flex items-center justify-center flex-col gap-12">
-            {rutines?.length === 0 && <Card />}
+            {!rutines && <Card />}
             <div className="w-full h-max flex items-center justify-normal text-center flex-col gap-6">
               <h1 className="text-white font-semibold text-5xl mt-28">
                 Tus rutinas
@@ -157,15 +158,59 @@ const Rutines = () => {
                   }
                 )}
               >
-                {rutines?.map((rutine) => {
-                  return (
-                    <UserRutine
-                      key={rutine.id!}
-                      rutines={rutines}
-                      rutine={rutine}
-                    />
-                  )
-                })}
+                {rutines!
+                  .map((rutine) => {
+                    return (
+                      <UserRutine
+                        key={rutine.id!}
+                        rutines={rutines!}
+                        rutine={rutine}
+                      />
+                    )
+                  })
+                  .filter((rutine) => {
+                    if (defaultFilter.name === "") return rutine
+                    else if (
+                      rutine.props.rutine.name
+                        .toLowerCase()
+                        .includes(defaultFilter.name.toLowerCase())
+                    ) {
+                      return rutine
+                    } else if (
+                      rutine.props.rutine.category.toLowerCase() ===
+                      defaultFilter.category.toLowerCase()
+                    ) {
+                      return rutine
+                    }
+                  }).length === 0 ? (
+                  <Empty result={defaultFilter.name} />
+                ) : (
+                  rutines!
+                    .map((rutine) => {
+                      return (
+                        <UserRutine
+                          key={rutine.id!}
+                          rutines={rutines!}
+                          rutine={rutine}
+                        />
+                      )
+                    })
+                    .filter((rutine) => {
+                      if (defaultFilter.name === "") return rutine
+                      else if (
+                        rutine.props.rutine.name
+                          .toLowerCase()
+                          .includes(defaultFilter.name.toLowerCase())
+                      ) {
+                        return rutine
+                      } else if (
+                        rutine.props.rutine.category.toLowerCase() ===
+                        defaultFilter.category.toLowerCase()
+                      ) {
+                        return rutine
+                      }
+                    })
+                )}
               </div>
             </div>
           </div>
