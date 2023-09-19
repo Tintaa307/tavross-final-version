@@ -102,11 +102,14 @@ const UserRutine = ({ key, rutine, rutines }: UserRutineProps) => {
       <div>
         <AlertDialog>
           <AlertDialogTrigger>
-            <div className="w-max h-max z-20 hover:bg-slate-400 transition-all duration-200">
+            <div
+              onClick={(e) => e.isPropagationStopped()}
+              className="w-max h-max z-20 hover:bg-slate-400 transition-all duration-200"
+            >
               <i
                 className={[
                   "ri-more-fill",
-                  "text-white text-xl cursor-pointer relative z-20 p-1",
+                  "text-white text-xl cursor-pointer relative z-20 p-2 rounded-md",
                 ].join(" ")}
               />
             </div>
