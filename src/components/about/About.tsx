@@ -1,12 +1,14 @@
-import Image from "next/image";
-import React from "react";
+import Image from "next/image"
+import React from "react"
 
 const About = () => {
   return (
     <section className="w-full h-max mt-20">
       <div className="w-full h-full flex flex-row items-center justify-center mb-10">
         <article className="w-1/2 h-full flex items-center justify-center flex-col gap-4">
-          <h2 className="text-white text-4xl font-normal">Why use Tavross?</h2>
+          <h2 className="text-white text-4xl font-normal">
+            Porque usar Tavross?
+          </h2>
           <p className="text-center text-[#ffffff57] text-sm font-normal mx-[90px]">
             ¡Bienvenido a Tavross! Somos más que una página de gimnasio; somos
             tu compañero de confianza en el viaje hacia una vida más saludable y
@@ -26,7 +28,7 @@ const About = () => {
         </article>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default About;
+export default About
