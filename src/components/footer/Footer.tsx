@@ -1,5 +1,7 @@
 import React from "react";
 import "./Footer.css";
+import Image from "next/image";
+
 const icons = [
   {
     icon: "ri-instagram-fill",
@@ -84,10 +86,17 @@ const account = [
 
 const Footer = () => {
   return (
-    <footer className="w-full h-[320px] bg-black mt-20 flex items-center justify-center">
+    <footer className="w-full h-[320px] bg-[#1f1f2e] mt-20 flex items-center justify-center">
       <section className="info">
         <div className="content">
-          <div>Logo</div>
+          <Image
+            src={"/TORO.png"}
+            alt="toro-image"
+            className="toro"
+            width={170}
+            height={100}
+          />
+
           <div className="site-links">
             <h2>Site Links</h2>
             <ul>

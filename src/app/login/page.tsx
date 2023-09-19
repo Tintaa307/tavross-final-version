@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { Field, Form, Formik } from "formik"
-import { signIn } from "next-auth/react"
-import Image from "next/image"
-import Link from "next/link"
-import React, { useState } from "react"
-import { Toaster, toast } from "react-hot-toast"
-import * as Yup from "yup"
-import { AxiosError } from "axios"
-import { useRouter } from "next/navigation"
-import { LoginValues } from "@/types"
-import { z } from "zod"
-import { cn } from "@/lib/utils"
+import { Field, Form, Formik } from "formik";
+import { signIn } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
+import * as Yup from "yup";
+import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+import { LoginValues } from "@/types";
+import { z } from "zod";
+import { cn } from "@/lib/utils";
 
 const SigninSchema = Yup.object().shape({
   password: Yup.string()
@@ -25,39 +25,39 @@ const SigninSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email")
     .required("Missing requiered field"),
-})
+});
 
 const Login = () => {
-  const [isLoading, setIsLoading] = useState(false)
-  const [isFocused, setIsFocused] = useState("")
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFocused, setIsFocused] = useState("");
 
-  const router = useRouter()
+  const router = useRouter();
 
   async function loginWithGoogle() {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       await signIn("google", { callbackUrl: "http://localhost:3000/dashboard" })
         .then((response) => {
           if (response?.error) {
-            toast.error("Something went wrong with your login.")
+            toast.error("Something went wrong with your login.");
           } else {
-            toast.success("You have successfully logged in.")
-            router.push("/dashboard")
+            toast.success("You have successfully logged in.");
+            router.push("/dashboard");
           }
         })
         .catch((error) => {
-          console.log("error", error)
-        })
+          console.log("error", error);
+        });
     } catch (error) {
       // display error message to user
-      toast.error("Something went wrong with your login.")
+      toast.error("Something went wrong with your login.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   }
 
   const loginWithEmail = async (values: LoginValues) => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       await signIn("credentials", {
         email: values.email,
@@ -66,28 +66,28 @@ const Login = () => {
       })
         .then((response) => {
           if (response?.error) {
-            toast.error("Something went wrong with your login.")
+            toast.error("Something went wrong with your login.");
           } else {
-            toast.success("You have successfully logged in.")
-            router.push("/dashboard")
+            toast.success("You have successfully logged in.");
+            router.push("/dashboard");
           }
         })
         .catch((error) => {
-          console.log("error", error)
-        })
+          console.log("error", error);
+        });
     } catch (error) {
       if (error instanceof z.ZodError) {
-        toast.error(error.message)
-        return
+        toast.error(error.message);
+        return;
       }
       if (error instanceof AxiosError) {
-        toast.error(error.message)
-        return
+        toast.error(error.message);
+        return;
       }
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <main className="w-full h-screen">
@@ -108,8 +108,8 @@ const Login = () => {
         <Formik
           initialValues={{ email: "", password: "" }}
           onSubmit={(values) => {
-            console.log(values)
-            loginWithEmail(values)
+            console.log(values);
+            loginWithEmail(values);
           }}
           validationSchema={SigninSchema}
         >
@@ -265,7 +265,7 @@ const Login = () => {
         </Formik>
       </section>
     </main>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
