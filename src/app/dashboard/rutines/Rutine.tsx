@@ -105,7 +105,7 @@ const UserRutine = ({ key, rutine, rutines }: UserRutineProps) => {
             <i
               className={[
                 "ri-more-fill",
-                "text-white text-xl cursor-pointer",
+                "text-white text-xl cursor-pointer relative z-10",
               ].join(" ")}
             />
           </AlertDialogTrigger>
