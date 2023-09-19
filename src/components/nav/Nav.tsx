@@ -69,7 +69,7 @@ const Nav = () => {
 
   const navItems = [
     {
-      name: "Dashboard",
+      name: "Inicio",
       path: "/dashboard",
       icon: "ri-home-line",
     },
