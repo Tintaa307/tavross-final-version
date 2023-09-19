@@ -86,11 +86,7 @@ const Exercise = ({ exercise, rutineId }: ExerciseProps) => {
 
   return (
     <div
-      onClick={() =>
-        router.push(
-          "/https://tavross-final-version.vercel.app/dashboard/rutines/25/exercise"
-        )
-      }
+      onClick={() => router.push("/dashboard/rutines/25/exercise")}
       className="w-[320px] h-[440px] bg-[#1d1c20] border-[1px] border-gray-700 rounded-md flex items-center justify-center text-center flex-col gap-5"
     >
       <Toaster />
