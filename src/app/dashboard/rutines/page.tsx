@@ -210,7 +210,6 @@ const Rutines = () => {
                         return rutine
                       }
                     })
-                    .reverse()
                 )}
               </div>
             </div>
