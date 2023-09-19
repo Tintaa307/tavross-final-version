@@ -38,19 +38,20 @@
 .social-section li {
   display: inline-block;
 }
-a {
+
+.social-section a {
   color: white;
   font-size: 14px;
 }
 
-h2 {
+.social-section h2 {
   color: white;
   margin-bottom: 8px;
   font-weight: 600;
   font-size: 22px;
 }
 
-i {
+.social-section i {
   font-size: 20px;
   margin: 0 16px;
 }

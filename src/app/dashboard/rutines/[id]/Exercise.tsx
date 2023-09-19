@@ -1,4 +1,7 @@
-import { updateRutineExercises } from "@/lib/controllers/exercises"
+import {
+  deleteRutineExercises,
+  updateRutineExercises,
+} from "@/lib/controllers/exercises"
 import { cn } from "@/lib/utils"
 import { ExerciseListProps } from "@/types"
 import React, { useState } from "react"
@@ -19,6 +22,10 @@ import {
 interface ExerciseProps {
   exercise: ExerciseListProps
   rutineId: string
+}
+
+interface ExerciseKey {
+  name: string
 }
 
 const Exercise = ({ exercise, rutineId }: ExerciseProps) => {
@@ -45,6 +52,20 @@ const Exercise = ({ exercise, rutineId }: ExerciseProps) => {
     },
   })
 
+  const deleteExerciseMutation = useMutation({
+    mutationKey: ["deleteExercise"],
+    mutationFn: async () => {
+      await deleteRutineExercises(rutineId)
+    },
+    onSuccess: () => {
+      toast.success("Exercise deleted")
+      queryClient.invalidateQueries("exercises")
+    },
+    onError: () => {
+      toast.error("Error deleting exercise")
+    },
+  })
+
   const handleEdit = async (exercise: ExerciseListProps) => {
     try {
       await updateExerciseMutation.mutateAsync(exercise)
@@ -53,7 +74,13 @@ const Exercise = ({ exercise, rutineId }: ExerciseProps) => {
     }
   }
 
-  const handleDelete = (exercise: ExerciseListProps) => {}
+  const handleDelete = async () => {
+    try {
+      await deleteExerciseMutation.mutateAsync()
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className="w-[320px] h-[440px] bg-[#1d1c20] border-[1px] border-gray-700 rounded-md flex items-center justify-center text-center flex-col gap-5">
@@ -129,7 +156,7 @@ const Exercise = ({ exercise, rutineId }: ExerciseProps) => {
                 </AlertDialogCancel>
                 <AlertDialogAction
                   className="bg-[#ee223b] hover:bg-[#ee223a75] transition-colors duration-200"
-                  onClick={() => handleDelete(exercise)}
+                  onClick={handleDelete}
                 >
                   Eliminar
                 </AlertDialogAction>

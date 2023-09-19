@@ -109,7 +109,7 @@ const Rutines = () => {
                   <i
                     className={[
                       "ri-search-line",
-                      "relative text-gray-400 text-lg left-11",
+                      "relative text-gray-400 text-lg left-8",
                     ].join(" ")}
                   />
                   <input
@@ -145,7 +145,7 @@ const Rutines = () => {
                 </Select>
                 <Link
                   href={"/dashboard/rutines/create"}
-                  className="w-44 h-11 bg-white flex items-center justify-center hover:bg-gray-300 transition-colors duration-200 text-black rounded-md font-semibold outline-none mr-[48px]"
+                  className="w-44 h-11 bg-white flex items-center justify-center hover:bg-gray-300 transition-colors duration-200 text-black rounded-md font-semibold outline-none mr-[17px]"
                 >
                   Crear rutina
                 </Link>

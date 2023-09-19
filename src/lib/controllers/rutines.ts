@@ -1,8 +1,8 @@
-import { ExerciseListProps, Rutine } from "@/types"
+import { Rutine } from "@/types"
 import axios from "axios"
 
 const rutineAPI = axios.create({
-  baseURL: "http://localhost:3000/api/rutine",
+  baseURL: "https://tavross-final-version.vercel.app/api/rutine",
 })
 
 export const createRutine = (rutine: Rutine) => {
