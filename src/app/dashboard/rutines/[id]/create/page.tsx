@@ -194,11 +194,19 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
                     </div>
                     <motion.div
                       onClick={() => {
-                        handleExercises({
-                          name: values.name,
-                          weight: Number(values.weight),
-                          reps: Number(values.reps),
-                        })
+                        handleExercises(
+                          rutine?.category === "cardio"
+                            ? {
+                                name: values.name,
+                                reps: Number(values.reps),
+                                weight: 0,
+                              }
+                            : {
+                                name: values.name,
+                                weight: Number(values.weight),
+                                reps: Number(values.reps),
+                              }
+                        )
                       }}
                       whileTap={{ scale: 0.9 }}
                       transition={{ duration: 0.5, type: "tween" }}
