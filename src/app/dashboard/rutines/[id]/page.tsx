@@ -62,7 +62,7 @@ const Exercises = ({ params }: { params: { id: string } }) => {
       <main className="w-full h-full flex items-center justify-center flex-col gap-24">
         <div className="w-full h-full flex items-center justify-center text-center flex-col gap-5">
           <h1 className="text-4xl font-bold text-white">
-            `&quot;`{rutine?.name}`&quot;`
+            &quot;{rutine?.name}&quot;
           </h1>
           <p className="text-gray-400 text-base font-normal w-1/3">
             Aqui puedes ver tu rutina de entrenamiento, podrás agregarle
