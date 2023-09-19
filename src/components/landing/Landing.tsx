@@ -25,9 +25,10 @@ const Landing = () => {
           <div className="">
             <button
               onClick={() => router.push("/dashboard/rutines")}
-              className="w-40 h-12 bg-blue-800 text-white font-normal rounded hover:bg-blue-900 transition-all"
+              className="w-40 h-12 bg-blue-800 text-white font-normal rounded hover:bg-blue-900 transition-all flex items-center justify-center flex-row"
             >
-              Comencemos <i className={["ri-arrow-right-line", ""].join(" ")} />
+              <span className="ml-2">Comencemos</span>{" "}
+              <i className={["ri-arrow-right-line", ""].join(" ")} />
             </button>
           </div>
         </article>
