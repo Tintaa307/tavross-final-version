@@ -147,7 +147,7 @@ const Exercise = ({ exercise, rutineId }: ExerciseProps) => {
               setIsEditing(!isEditing)
               isEditing ? handleEdit(exercise) : null
             }}
-            className="w-[120px] h-11 bg-blue-600 text-white font-semibold text-lg rounded-sm hover:bg-blue-800 transition-colors duration-200"
+            className="w-[120px] h-11 bg-white text-black font-semibold text-lg rounded-sm hover:bg-[#ffffff8c] transition-colors duration-200"
           >
             {isEditing ? "Guardar" : "Editar"}
           </button>
