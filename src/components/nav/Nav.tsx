@@ -80,7 +80,7 @@ const Nav = () => {
     },
     {
       name: "Calculadora RM",
-      path: "/dashboard/rm",
+      path: "/dashboard/calculator",
       icon: "ri-calculator-line",
     },
     {
