@@ -123,6 +123,7 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
                     ? {
                         name: "",
                         reps: "",
+                        weight: 0,
                       }
                     : {
                         name: "",
