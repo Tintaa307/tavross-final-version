@@ -102,21 +102,12 @@ const UserRutine = ({ key, rutine, rutines }: UserRutineProps) => {
       <div>
         <AlertDialog>
           <AlertDialogTrigger>
-            <Popover>
-              <PopoverTrigger asChild>
-                <i
-                  className={[
-                    "ri-more-fill",
-                    "text-white text-xl cursor-pointer",
-                  ].join(" ")}
-                />
-              </PopoverTrigger>
-              <PopoverContent className="w-max h-max bg-[#13131A]">
-                <button className="w-max h-max px-3 p-2 border-[1px] bg-transparent border-[#ee223b] rounded-md text-[#ee223b] font-semibold hover:bg-[#ee223b] transition-colors duration-200 hover:text-white">
-                  Eliminar rutina
-                </button>
-              </PopoverContent>
-            </Popover>
+            <i
+              className={[
+                "ri-more-fill",
+                "text-white text-xl cursor-pointer",
+              ].join(" ")}
+            />
           </AlertDialogTrigger>
           <AlertDialogContent className="bg-[#13131A] border-[1px] border-gray-700">
             <AlertDialogHeader>
@@ -124,7 +115,7 @@ const UserRutine = ({ key, rutine, rutines }: UserRutineProps) => {
                 Estas seguro de esto?
               </AlertDialogTitle>
               <AlertDialogDescription>
-                Esta accion no se puede deshacer. Este ejercicio sera eliminado
+                Esta accion no se puede deshacer. Esta rutina sera eliminada
                 permanentemente.
               </AlertDialogDescription>
             </AlertDialogHeader>
