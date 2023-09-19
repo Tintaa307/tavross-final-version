@@ -118,11 +118,18 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
                 Agrega tus ejercicios
               </h1>
               <Formik
-                initialValues={{
-                  name: "",
-                  weight: "",
-                  reps: "",
-                }}
+                initialValues={
+                  rutine?.category === "cardio"
+                    ? {
+                        name: "",
+                        reps: "",
+                      }
+                    : {
+                        name: "",
+                        weight: "",
+                        reps: "",
+                      }
+                }
                 validationSchema={exerciseSchema}
                 onSubmit={(values) => {
                   console.log(values)
