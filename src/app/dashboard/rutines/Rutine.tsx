@@ -63,7 +63,7 @@ const UserRutine = ({ key, rutine, rutines }: UserRutineProps) => {
     <div
       onClick={() => router.push(`/dashboard/rutines/${rutine.id}`)}
       className={cn(
-        "w-full h-max flex items-center justify-between px-4 py-3 hover:bg-slate-400 hover:bg-opacity-20 transition-colors duration-200 cursor-pointer",
+        "w-full h-max flex items-center justify-between px-4 py-3 hover:bg-slate-400 hover:bg-opacity-20 transition-colors duration-200 cursor-pointer relative z-10",
         {
           "border-b-[1px] border-gray-400":
             rutines.indexOf(rutine) !== rutines.length - 1,
@@ -105,7 +105,7 @@ const UserRutine = ({ key, rutine, rutines }: UserRutineProps) => {
             <i
               className={[
                 "ri-more-fill",
-                "text-white text-xl cursor-pointer relative z-10",
+                "text-white text-xl cursor-pointer relative z-20 p-1",
               ].join(" ")}
             />
           </AlertDialogTrigger>
