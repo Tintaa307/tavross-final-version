@@ -87,7 +87,7 @@ const Exercise = ({ exercise, rutineId }: ExerciseProps) => {
   return (
     <div
       onClick={() => router.push("/dashboard/rutines/25/exercise")}
-      className="w-[320px] h-[440px] bg-[#1d1c20] border-[1px] border-gray-700 rounded-md flex items-center justify-center text-center flex-col gap-5"
+      className="w-[320px] h-[440px] bg-[#1d1c20] border-[1px] border-gray-700 rounded-md flex items-center justify-center text-center flex-col gap-5 cursor-pointer"
     >
       <Toaster />
       <h2 className="text-white font-semibold text-[26px]">{exercise.name}</h2>

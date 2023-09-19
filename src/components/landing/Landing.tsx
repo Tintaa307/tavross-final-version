@@ -37,9 +37,9 @@ const Landing = () => {
         <Model
           url={"ANIMACION_REMO"}
           cameraPosition={{
-            x: 0.17,
-            y: 0.17,
-            z: 0.19,
+            x: 0.042,
+            y: 0.042,
+            z: 0.042,
           }}
         />
       </div>
