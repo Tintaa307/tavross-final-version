@@ -1,6 +1,6 @@
-import React from "react";
-import "./Footer.css";
-import Image from "next/image";
+import React from "react"
+import "./Footer.css"
+import Image from "next/image"
 
 const icons = [
   {
@@ -28,7 +28,7 @@ const icons = [
     path: "#",
     name: "Linkedin",
   },
-];
+]
 
 const help = [
   {
@@ -47,7 +47,7 @@ const help = [
     name: "Terms",
     path: "#",
   },
-];
+]
 
 const siteLinks = [
   {
@@ -66,7 +66,7 @@ const siteLinks = [
     name: "Blog",
     path: "#",
   },
-];
+]
 
 const account = [
   {
@@ -82,7 +82,7 @@ const account = [
     path: "#",
   },
   {},
-];
+]
 
 const Footer = () => {
   return (
@@ -98,33 +98,39 @@ const Footer = () => {
           />
 
           <div className="site-links">
-            <h2>Site Links</h2>
+            <h2 className="text-white">Site Links</h2>
             <ul>
               {siteLinks.map((item, index) => (
                 <li key={index}>
-                  <a href={item.path}>{item.name}</a>
+                  <a className="text-white" href={item.path}>
+                    {item.name}
+                  </a>
                   <div className="styles"></div>
                 </li>
               ))}
             </ul>
           </div>
           <div className="help-section">
-            <h2>Help section</h2>
+            <h2 className="text-white">Help section</h2>
             <ul>
               {help.map((item, index) => (
                 <li key={index}>
-                  <a href={item.path}>{item.name}</a>
+                  <a className="text-white" href={item.path}>
+                    {item.name}
+                  </a>
                   <div className="styles"></div>
                 </li>
               ))}
             </ul>
           </div>
           <div className="account-section">
-            <h2>Account</h2>
+            <h2 className="text-white">Account</h2>
             <ul>
               {account.map((item, index) => (
                 <li key={index}>
-                  <a href={item.path}>{item.name}</a>
+                  <a className="text-white" href={item.path}>
+                    {item.name}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -142,7 +148,7 @@ const Footer = () => {
         </div>
       </section>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

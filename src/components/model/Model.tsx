@@ -57,8 +57,8 @@ const Model = ({ url, cameraPosition }: ModelProps) => {
       `/${url}.gltf`,
       function (gltf) {
         let modelGltf = gltf.scene
-        modelGltf.scale.set(0.038, 0.038, 0.038)
-        modelGltf.position.set(0, -0.11, -0.01)
+        modelGltf.scale.set(0.042, 0.042, 0.042)
+        modelGltf.position.set(0, -0.15, 0.03)
         scene.add(modelGltf)
         mixer = new THREE.AnimationMixer(modelGltf)
         const clips = gltf.animations
