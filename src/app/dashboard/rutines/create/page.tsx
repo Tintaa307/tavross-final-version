@@ -24,8 +24,8 @@ import {
 } from "@/components/ui/select"
 
 const rutineSchema = Yup.object().shape({
-  name: Yup.string().required("Name is required"),
-  frequency: Yup.string().required("Frequency is required"),
+  name: Yup.string().required("Completa este campo!"),
+  frequency: Yup.string().required("Completa este campo!"),
 })
 
 const Create = () => {
