@@ -8,6 +8,7 @@
 
 ::-webkit-scrollbar-thumb {
   background-color: #1f1f2e;
+  border-radius: 5rem;
 }
 
 .special {
