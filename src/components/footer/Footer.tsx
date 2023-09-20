@@ -86,7 +86,7 @@ const account = [
 
 const Footer = () => {
   return (
-    <footer className="w-full h-[320px] bg-[#13131a] mt-20 flex items-center justify-center">
+    <footer className="w-full h-[320px] bg-[#111111] mt-20 flex items-center justify-center">
       <section className="info">
         <div className="content">
           <Image
