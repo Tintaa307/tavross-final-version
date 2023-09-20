@@ -47,7 +47,7 @@ const Exercise = ({ exercise, rutineId }: ExerciseProps) => {
       })
     },
     onSuccess: () => {
-      toast.success("Exercise updated")
+      toast.success("Ejercicio actualizado")
       queryClient.invalidateQueries("exercises")
     },
     onError: () => {
@@ -65,7 +65,7 @@ const Exercise = ({ exercise, rutineId }: ExerciseProps) => {
       queryClient.invalidateQueries("exercises")
     },
     onError: () => {
-      toast.error("Error deleting exercise")
+      toast.error("Que haces vago?")
     },
   })
 
