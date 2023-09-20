@@ -30,6 +30,8 @@ const icons = [
   },
 ]
 
+const footerArray = []
+
 const help = [
   {
     name: "Help",
