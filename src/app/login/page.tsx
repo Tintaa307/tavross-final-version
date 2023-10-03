@@ -1,17 +1,17 @@
-"use client";
+"use client"
 
-import { Field, Form, Formik } from "formik";
-import { signIn } from "next-auth/react";
-import Image from "next/image";
-import Link from "next/link";
-import React, { useState } from "react";
-import { Toaster, toast } from "react-hot-toast";
-import * as Yup from "yup";
-import { AxiosError } from "axios";
-import { useRouter } from "next/navigation";
-import { LoginValues } from "@/types";
-import { z } from "zod";
-import { cn } from "@/lib/utils";
+import { Field, Form, Formik } from "formik"
+import { signIn } from "next-auth/react"
+import Image from "next/image"
+import Link from "next/link"
+import React, { useState } from "react"
+import { Toaster, toast } from "react-hot-toast"
+import * as Yup from "yup"
+import { AxiosError } from "axios"
+import { useRouter } from "next/navigation"
+import { LoginValues } from "@/types"
+import { z } from "zod"
+import { cn } from "@/lib/utils"
 
 const SigninSchema = Yup.object().shape({
   password: Yup.string()
@@ -25,39 +25,39 @@ const SigninSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email")
     .required("Missing requiered field"),
-});
+})
 
 const Login = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isFocused, setIsFocused] = useState("");
+  const [isLoading, setIsLoading] = useState(false)
+  const [isFocused, setIsFocused] = useState("")
 
-  const router = useRouter();
+  const router = useRouter()
 
   async function loginWithGoogle() {
-    setIsLoading(true);
+    setIsLoading(true)
     try {
       await signIn("google", { callbackUrl: "http://localhost:3000/dashboard" })
         .then((response) => {
           if (response?.error) {
-            toast.error("Something went wrong with your login.");
+            toast.error("Something went wrong with your login.")
           } else {
-            toast.success("You have successfully logged in.");
-            router.push("/dashboard");
+            toast.success("You have successfully logged in.")
+            router.push("/dashboard")
           }
         })
         .catch((error) => {
-          console.log("error", error);
-        });
+          console.log("error", error)
+        })
     } catch (error) {
       // display error message to user
-      toast.error("Something went wrong with your login.");
+      toast.error("Something went wrong with your login.")
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
   }
 
   const loginWithEmail = async (values: LoginValues) => {
-    setIsLoading(true);
+    setIsLoading(true)
     try {
       await signIn("credentials", {
         email: values.email,
@@ -66,34 +66,36 @@ const Login = () => {
       })
         .then((response) => {
           if (response?.error) {
-            toast.error("Something went wrong with your login.");
+            toast.error("Something went wrong with your login.")
           } else {
-            toast.success("You have successfully logged in.");
-            router.push("/dashboard");
+            toast.success("You have successfully logged in.")
+            router.push("/")
           }
         })
         .catch((error) => {
-          console.log("error", error);
-        });
+          console.log("error", error)
+        })
     } catch (error) {
       if (error instanceof z.ZodError) {
-        toast.error(error.message);
-        return;
+        toast.error(error.message)
+        return
       }
       if (error instanceof AxiosError) {
-        toast.error(error.message);
-        return;
+        toast.error(error.message)
+        return
       }
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   return (
     <main className="w-full h-screen">
       <Toaster />
-      <div className="absolute m-14">
-        <h2 className="text-white font-normal text-3xl">Tavross</h2>
+      <div className="absolute m-14 z-10">
+        <Link href={"/"} className="text-white font-normal text-3xl">
+          Tavross
+        </Link>
       </div>
       <section className="w-1/2 h-full absolute left-0 top-0 flex items-center justify-center">
         <Image
@@ -108,8 +110,8 @@ const Login = () => {
         <Formik
           initialValues={{ email: "", password: "" }}
           onSubmit={(values) => {
-            console.log(values);
-            loginWithEmail(values);
+            console.log(values)
+            loginWithEmail(values)
           }}
           validationSchema={SigninSchema}
         >
@@ -238,7 +240,7 @@ const Login = () => {
                 ) : (
                   <button
                     type="submit"
-                    className="w-1/2 h-12 px-4 rounded bg-blue-800 text-white mb-5"
+                    className="w-1/2 h-12 px-4 rounded bg-primary_green/20 border-[1px] border-primary_green text-white mb-5 hover:bg-primary_light_green/40 transition-colors duration-200"
                   >
                     Sign in
                   </button>
@@ -265,7 +267,7 @@ const Login = () => {
         </Formik>
       </section>
     </main>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

@@ -1,7 +1,6 @@
 "use client"
 
-import React, { ChangeEvent, use, useEffect, useState } from "react"
-import "./Calculator.css"
+import React, { useEffect, useState } from "react"
 import {
   Table,
   TableBody,
@@ -94,8 +93,10 @@ const Calculator = () => {
   }
 
   return (
-    <section className="calculator">
-      <h1 className="title">Calculadora de RM</h1>
+    <section className="w-full h-screen">
+      <h1 className="text-white font-semibold text-4xl text-center my-12">
+        Calculadora de RM
+      </h1>
       <div className="calculator-content">
         <form
           onSubmit={submit}

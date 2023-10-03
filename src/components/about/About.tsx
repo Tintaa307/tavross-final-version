@@ -1,31 +1,87 @@
-import Image from "next/image"
 import React from "react"
+import {
+  IconTable,
+  IconTrendingUp,
+  IconBrandUnity,
+  IconBrain,
+  IconCalculator,
+  IconStretching,
+} from "@tabler/icons-react"
+import Card from "./Card"
 
 const About = () => {
+  const cardsInfo = [
+    {
+      title: "Models 3D",
+      icon: <IconBrandUnity className="text-primary_green" />,
+      description:
+        "Los modelos 3D te permiten aprender sobre la tecnica de los ejercicios y asi mejorar tu entrenamiento.",
+      width: "w-[580px]",
+      height: "h-[450px]",
+      isBig: true,
+    },
+    {
+      title: "Rutines",
+      icon: <IconTable className="text-primary_green" />,
+      description:
+        "Los modelos 3D te permiten aprender sobre la tecnica de los ejercicios.",
+      width: "w-[240px]",
+      height: "h-[450px]",
+      isBig: false,
+    },
+    {
+      title: "RM Calculator",
+      icon: <IconCalculator className="text-primary_green" />,
+      description:
+        "Los modelos 3D te permiten aprender sobre la tecnica de los ejercicios.",
+      width: "w-[240px]",
+      height: "h-[450px]",
+      isBig: false,
+    },
+    {
+      title: "Progress",
+      icon: <IconTrendingUp className="text-primary_green" />,
+      description:
+        "Los modelos 3D te permiten aprender sobre la tecnica de los ejercicios.",
+      width: "w-[240px]",
+      height: "h-[450px]",
+      isBig: false,
+    },
+    {
+      title: "Preloaded exercises",
+      icon: <IconStretching className="text-primary_green" />,
+      description:
+        "Los modelos 3D te permiten aprender sobre la tecnica de los ejercicios.",
+      width: "w-[240px]",
+      height: "h-[450px]",
+      isBig: false,
+    },
+    {
+      title: "Personal Improvements",
+      icon: <IconBrain className="text-primary_green" />,
+      description:
+        "Los modelos 3D te permiten aprender sobre la tecnica de los ejercicios.",
+      width: "w-[580px]",
+      height: "h-[450px]",
+      className: "",
+      isBig: true,
+    },
+  ]
   return (
-    <section className="w-full h-max mt-20">
-      <div className="w-full h-full flex flex-row items-center justify-center mb-10">
-        <article className="w-1/2 h-full flex items-center justify-center flex-col gap-4">
-          <h2 className="text-white text-4xl font-normal">
-            Porque usar Tavross?
-          </h2>
-          <p className="text-center text-[#ffffff57] text-sm font-normal mx-[90px]">
-            ¡Bienvenido a Tavross! Somos más que una página de gimnasio; somos
-            tu compañero de confianza en el viaje hacia una vida más saludable y
-            activa. En Tavross, nuestra misión es brindarte las herramientas y
-            el apoyo que necesitas para alcanzar tus metas de acondicionamiento
-            físico de manera efectiva y sostenible.
-          </p>
-        </article>
-        <article className="w-1/2 h-full flex items-center justify-center">
-          <Image
-            src={"/david-laid.png"}
-            alt="about-image"
-            width={300}
-            height={400}
-            className="drop-shadow-custom"
-          />
-        </article>
+    <section className="w-full h-max flex items-center justify-center flex-col mt-24 bg-gradient-radial">
+      <h2 className="text-text_gray font-semibold text-3xl mb-16">
+        Why use <span className="text-primary_green">Tavross</span> instead
+        other apps?
+      </h2>
+      <div className="w-full h-full flex flex-row items-center justify-center flex-wrap">
+        {cardsInfo.map(
+          ({ title, description, icon, width, height, isBig }, index) => (
+            <Card
+              key={index}
+              {...{ index, title, description, icon, width, height, isBig }}
+            />
+          )
+        )}
       </div>
     </section>
   )

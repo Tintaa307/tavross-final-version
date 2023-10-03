@@ -2,7 +2,7 @@ import { Rutine } from "@/types"
 import axios from "axios"
 
 const rutineAPI = axios.create({
-  baseURL: "https://tavross-final-version.vercel.app/api/rutine",
+  baseURL: "http://localhost:3000/api/rutine",
 })
 
 export const createRutine = (rutine: Rutine) => {

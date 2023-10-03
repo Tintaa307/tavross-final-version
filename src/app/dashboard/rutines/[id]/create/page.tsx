@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils"
 import { Field, Form, Formik } from "formik"
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import toast, { Toaster } from "react-hot-toast"
 import * as Yup from "yup"
 import { motion } from "framer-motion"
@@ -113,7 +113,7 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
         <main className="w-full h-full flex items-center justify-center">
           <Toaster />
           <div className="w-full h-full flex items-center justify-center flex-row">
-            <div className="w-1/2 h-[86.7vh] flex items-center justify-center flex-col gap-4">
+            <div className="w-1/2 h-screen flex items-center justify-center flex-col gap-4">
               <h1 className="text-white text-4xl font-normal">
                 Agrega tus ejercicios
               </h1>
@@ -152,7 +152,7 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
                         name="name"
                         value={values.name}
                         className={cn(
-                          "w-1/2 h-12 outline-none bg-transparent border-b-[2px] border-white focus:border-blue-700 transition-all duration-500 text-white",
+                          "w-1/2 h-12 outline-none bg-transparent border-b-[2px] border-white focus:border-primary_green transition-all duration-500 text-white",
                           {
                             "border-[#ff6b6b]": errors.name && touched.name,
                           }
@@ -171,7 +171,7 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
                           type="number"
                           value={values.weight}
                           className={cn(
-                            "w-1/2 h-12 outline-none bg-transparent border-b-[2px] border-white focus:border-blue-700 transition-all duration-500 text-white",
+                            "w-1/2 h-12 outline-none bg-transparent border-b-[2px] border-white focus:border-primary_green transition-all duration-500 text-white",
                             {
                               "border-[#ff6b6b]":
                                 errors.weight && touched.weight,
@@ -193,7 +193,7 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
                         name="reps"
                         value={values.reps}
                         className={cn(
-                          "w-1/2 h-12 outline-none bg-transparent border-b-[2px] border-white focus:border-blue-700 transition-all duration-500 text-white",
+                          "w-1/2 h-12 outline-none bg-transparent border-b-[2px] border-white focus:border-primary_green transition-all duration-500 text-white",
                           {
                             "border-[#ff6b6b]": errors.reps && touched.reps,
                           }
@@ -218,7 +218,7 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
                       }}
                       whileTap={{ scale: 0.9 }}
                       transition={{ duration: 0.5, type: "tween" }}
-                      className="w-1/2 h-12 px-4 rounded bg-blue-800 text-white mt-4 hover:bg-blue-900 flex items-center justify-center cursor-pointer transition-colors duration-200"
+                      className="w-1/2 h-12 px-4 rounded bg-primary_green/20 text-white mt-4 hover:bg-primary_light_green/40 flex items-center justify-center cursor-pointer transition-colors duration-200 border-[1px] border-primary_green"
                     >
                       Agregar ejercicio
                     </motion.div>
@@ -226,16 +226,16 @@ const AddExercises = ({ params }: { params: { id: string } }) => {
                       isLoading ? (
                         <button
                           type="submit"
-                          className="w-1/2 h-12 mt-4 flex items-center justify-center px-4 rounded bg-transparent text-white mb-5 border-[1px] border-blue-800"
+                          className="w-1/2 h-12 mt-4 flex items-center justify-center px-4 rounded bg-transparent text-white mb-5 border-[1px] border-primary_green"
                         >
-                          <div className="w-6 h-6 rounded-full border-2 border-solid border-blue-500 border-l-transparent bg-transparent animate-spin" />
+                          <div className="w-6 h-6 rounded-full border-2 border-solid border-primary_green border-l-transparent bg-transparent animate-spin" />
                         </button>
                       ) : (
                         <motion.button
                           whileTap={{ scale: 0.9 }}
                           transition={{ duration: 0.5, type: "tween" }}
                           type="submit"
-                          className="w-1/2 h-12 px-4 rounded bg-blue-800 text-white mt-4 hover:bg-blue-900"
+                          className="w-1/2 h-12 px-4 rounded bg-primary_green/70 text-white mt-4 hover:bg-primary_dark_green/80"
                         >
                           Enviar ejercicios
                         </motion.button>

@@ -79,7 +79,7 @@ const Create = () => {
         <main className="w-full h-full flex items-center justify-center">
           <Toaster />
           <div className="w-full h-full flex items-center justify-center flex-row">
-            <div className="w-1/2 h-[86.7vh] flex items-center justify-center flex-col gap-4">
+            <div className="w-1/2 h-screen flex items-center justify-center flex-col gap-4">
               <h1 className="text-white text-4xl font-normal">
                 Crea tus rutinas
               </h1>
@@ -113,7 +113,7 @@ const Create = () => {
                         name="name"
                         value={values.name}
                         className={cn(
-                          "w-1/2 h-12 outline-none bg-transparent border-b-[2px] border-white focus:border-blue-700 transition-all duration-500 text-white",
+                          "w-1/2 h-12 outline-none bg-transparent border-b-[2px] border-white focus:border-primary_green transition-all duration-500 text-white",
                           {
                             "border-red": errors.name && touched.name,
                           }
@@ -130,7 +130,7 @@ const Create = () => {
                         name="frequency"
                         value={values.frequency}
                         className={cn(
-                          "w-1/2 h-12 outline-none bg-transparent border-b-[2px] border-white focus:border-blue-700 transition-all duration-500 text-white",
+                          "w-1/2 h-12 outline-none bg-transparent border-b-[2px] border-white focus:border-primary_green transition-all duration-500 text-white",
                           {
                             "border-red": errors.frequency && touched.frequency,
                           }
@@ -161,16 +161,16 @@ const Create = () => {
                     {isLoading ? (
                       <button
                         type="submit"
-                        className="w-1/2 h-12 flex items-center justify-center px-4 rounded bg-transparent text-white mb-5 border-[1px] border-blue-800"
+                        className="w-1/2 h-12 flex items-center justify-center px-4 rounded bg-transparent text-white mb-5 border-[1px] border-primary_green"
                       >
-                        <div className="w-6 h-6 rounded-full border-2 border-solid border-blue-500 border-l-transparent bg-transparent animate-spin" />
+                        <div className="w-6 h-6 rounded-full border-2 border-solid border-primary_green border-l-transparent bg-transparent animate-spin" />
                       </button>
                     ) : (
                       <motion.button
                         whileTap={{ scale: 0.9 }}
                         transition={{ duration: 0.5, type: "tween" }}
                         type="submit"
-                        className="w-1/2 h-12 px-4 rounded bg-blue-800 text-white mt-4 hover:bg-blue-900 "
+                        className="w-1/2 h-12 px-4 rounded bg-primary_green/20 border-[1px] border-primary_green text-white mt-4 hover:bg-primary_light_green/40 transition-colors duration-200"
                       >
                         Crear rutina
                       </motion.button>

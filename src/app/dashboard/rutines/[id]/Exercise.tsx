@@ -26,10 +26,6 @@ interface ExerciseProps {
   rutineId: string
 }
 
-interface ExerciseKey {
-  name: string
-}
-
 const Exercise = ({ exercise, rutineId }: ExerciseProps) => {
   const [isEditing, setIsEditing] = useState(false)
   const [newWeight, setNewWeight] = useState(exercise.weight.toString())
@@ -100,7 +96,7 @@ const Exercise = ({ exercise, rutineId }: ExerciseProps) => {
   }
 
   return (
-    <div className="w-[320px] h-[440px] bg-[#1d1c20] border-[1px] border-gray-700 rounded-md flex items-center justify-center text-center flex-col gap-5 cursor-pointer">
+    <div className="w-[320px] h-[440px] bg-[#1b1b22]/70 border-[1px] border-primary_light_green/40 rounded-md flex items-center justify-center text-center flex-col gap-5 cursor-pointer">
       <Toaster />
       <h2 className="text-white font-semibold text-[26px]">{exercise.name}</h2>
       <p className="text-base text-gray-400 font-normal px-3">

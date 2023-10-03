@@ -280,7 +280,7 @@ const Register = () => {
                 ) : (
                   <button
                     type="submit"
-                    className="w-1/2 h-12 px-4 rounded bg-blue-800 text-white mb-5"
+                    className="w-1/2 h-12 px-4 rounded bg-primary_green/20 border-[1px] border-primary_green text-white mb-5 hover:bg-primary_light_green/40 transition-colors duration-200"
                   >
                     Sign up
                   </button>

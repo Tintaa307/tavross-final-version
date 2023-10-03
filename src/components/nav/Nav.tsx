@@ -1,67 +1,21 @@
 "use client"
 
-import { signOut, useSession } from "next-auth/react"
-import Image from "next/image"
-import { useRouter } from "next/navigation"
-import React, { useEffect, useState } from "react"
+import { useSession } from "next-auth/react"
+import React, { useState } from "react"
 import "remixicon/fonts/remixicon.css"
-import { Variants, motion } from "framer-motion"
-import { cn } from "@/lib/utils"
-
-const variants: Variants = {
-  open: {
-    width: "350px",
-    height: "500px",
-    transition: {
-      duration: 0.3,
-      type: "tween",
-    },
-  },
-  closed: {
-    width: "20px",
-    height: "20px",
-    transition: {
-      duration: 0.3,
-      type: "tween",
-    },
-  },
-}
-
-const iconVariants: Variants = {
-  open: {
-    x: 146,
-    y: -221,
-    transition: {
-      duration: 0.4,
-      type: "tween",
-    },
-  },
-  closed: {
-    x: 0,
-    y: 0,
-    transition: {
-      duration: 0.3,
-      type: "tween",
-    },
-  },
-}
+import LoginButton from "./login-button"
+import RegisterButton from "./register-button"
+import Avatar from "./avatar"
+import UserDisplay from "./user-display"
+import NavItems from "./nav-items"
+import { usePathname } from "next/navigation"
 
 const Nav = () => {
+  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(
     "-translate-x-[400px] transition duration-950"
   )
-  const { data: session, status } = useSession()
-  const router = useRouter()
-  const [userImage, setUserImage] = useState("")
-  const [openState, setOpenState] = useState(false)
-
-  useEffect(() => {
-    if (session) {
-      if (session?.user?.image) {
-        setUserImage(session?.user?.image.toString()!)
-      }
-    }
-  }, [session])
+  const { data: session } = useSession()
 
   const handleBlur = () => {
     setIsOpen("-translate-x-[400px] transition duration-950")
@@ -101,135 +55,72 @@ const Nav = () => {
   }
 
   return (
-    <header className="relative top-0 left-0 w-full h-20">
-      <nav className="w-full h-full">
-        <div className="fixed m-5">
-          <i
-            onClick={handleOpen}
-            className={[
-              "ri-menu-fill",
-              "text-2xl text-white cursor-pointer font-normal",
-            ].join(" ")}
-          />
-        </div>
-        <div
-          className={[
-            "fixed top-0 left-0 w-80 h-screen bg-[#1f1f2e] rounded-r-2xl z-40",
-            isOpen,
-          ].join(" ")}
-          onBlur={handleBlur}
-        >
-          <div className="absolute right-6 top-6 w-8 h-8 hover:bg-[#ffffff2b] flex items-center justify-center rounded-lg">
-            <i
-              onClick={handleOpen}
+    <>
+      {pathname !== "/login" && pathname !== "/register" ? (
+        <header className="fixed top-0 left-0 w-full h-20 z-20">
+          <nav className="w-full h-full">
+            <div className="fixed m-5 z-30">
+              <i
+                onClick={handleOpen}
+                className={[
+                  "ri-menu-fill",
+                  "text-2xl text-white cursor-pointer font-normal",
+                ].join(" ")}
+              />
+            </div>
+            <div
               className={[
-                "ri-close-line",
-                "text-white text-2xl cursor-pointer",
+                "fixed top-0 left-0 w-80 h-screen bg-[#1f1f2e] rounded-r-2xl z-40",
+                isOpen,
               ].join(" ")}
-            />
-          </div>
-          <div className="mt-7 ml-5">
-            <small className="text-white text-lg">Tavross</small>
-          </div>
-          <ul className="mt-12 w-full h-max flex items-center justify-center flex-col">
-            {navItems.map((item, index) => (
-              <li
-                onClick={() => {
-                  router.push(item.path)
-                  setIsOpen(
-                    "-translate-x-[400px] transition duration-1000 delay-200"
-                  )
-                }}
-                className="w-4/5 h-11 flex items-center justify-start hover:bg-[#ffffff2c] rounded-lg my-2 transition-all cursor-pointer"
-                key={index}
-              >
+              onBlur={handleBlur}
+            >
+              <div className="absolute right-6 top-6 w-8 h-8 hover:bg-[#ffffff2b] flex items-center justify-center rounded-lg">
                 <i
-                  className={[item.icon, "text-white text-xl mx-2"].join(" ")}
+                  onClick={handleOpen}
+                  className={[
+                    "ri-close-line",
+                    "text-white text-2xl cursor-pointer",
+                  ].join(" ")}
                 />
-                <small className="text-white text-[0.875rem]">
-                  {item.name}
-                </small>
-              </li>
-            ))}
-          </ul>
-          {session ? (
-            <div className="absolute w-full h-max bottom-5 left-0  flex items-start justify-start flex-row">
-              {userImage !== "" ? (
-                <Image
-                  src={userImage}
-                  alt="user-image"
-                  className="rounded-full cursor-pointer mx-4"
-                  width={35}
-                  height={35}
-                />
+              </div>
+              <div className="mt-7 ml-5">
+                <small className="text-white text-lg">Tavross</small>
+              </div>
+              <ul className="mt-12 w-full h-max flex items-center justify-center flex-col">
+                {navItems.map((item, index) => (
+                  <NavItems
+                    key={index}
+                    name={item.name}
+                    path={item.path}
+                    icon={item.icon}
+                  />
+                ))}
+              </ul>
+              {session ? (
+                <UserDisplay session={session} />
               ) : (
-                <div className="w-11 h-11 mx-4 cursor-pointer bg-gray-600 rounded-full flex items-center justify-center text-white font-semibold text-xl">
-                  T
+                <div className="absolute w-full bottom-5 left-0 flex items-center justify-center">
+                  <h2 className="text-primary_green font-normal text-lg">
+                    Sign in to continue
+                  </h2>
                 </div>
               )}
-              <div className="w-1/2 flex flex-col">
-                <h4 className="text-white font-normal text-sm">
-                  {session?.user?.name}
-                </h4>
-                <small className="text-[#ffffff57] text-xs w-1/2">
-                  {session.user?.email?.length! > 25
-                    ? session?.user?.email?.split("@")[0].concat("...")
-                    : session?.user?.email}
-                </small>
-              </div>
-              <button
-                onClick={() =>
-                  signOut({ callbackUrl: "http://localhost:3000/login" })
-                }
-                className="absolute -mt-4 right-4 w-14 h-16 rounded hover:bg-[#ffffff2b] transition-all"
-              >
-                <i
-                  className={["ri-logout-box-line", "text-white text-xl"].join(
-                    " "
-                  )}
-                />
-              </button>
             </div>
-          ) : (
-            <div className="absolute w-full bottom-5 left-0 flex items-center justify-center">
-              <h2 className="text-white font-normal text-lg">
-                You are not logged yet
-              </h2>
-            </div>
-          )}
-        </div>
-        {!session ? (
-          <article className="absolute top-8 right-14 flex flex-row gap-6">
-            <div className="">
-              <button className="w-40 h-14">
-                <small
-                  onClick={() => router.push("/login")}
-                  className="text-white text-base font-normal border-b-[1.9px] pb-1 border-blue-600 border-opacity-0 hover:border-opacity-100 transition-all"
-                >
-                  Sign in
-                </small>
-              </button>
-            </div>
-            <div className="">
-              <button
-                onClick={() => router.push("/register")}
-                className="w-40 h-14 bg-blue-700 text-white font-normal text-base rounded-sm hover:bg-blue-800 transition-all duration-900"
-              >
-                Sign up for free
-              </button>
-            </div>
-          </article>
-        ) : (
-          <article className="absolute top-5 right-12 flex flex-row">
-            <div onClick={() => setOpenState(!openState)} className="">
-              <div className="w-11 h-11 bg-slate-600 rounded-full text-white text-xl font-bold flex items-center justify-center cursor-pointer">
-                T
-              </div>
-            </div>
-          </article>
-        )}
-      </nav>
-    </header>
+            {!session ? (
+              <article className="absolute top-8 right-14 flex flex-row gap-6">
+                <LoginButton />
+                <RegisterButton />
+              </article>
+            ) : (
+              <article autoFocus={false} className="absolute top-5 right-12">
+                <Avatar className="" />
+              </article>
+            )}
+          </nav>
+        </header>
+      ) : null}
+    </>
   )
 }
 

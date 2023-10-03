@@ -16,7 +16,17 @@ module.exports = {
       },
     },
     extend: {
+      backgroundImage: {
+        "gradient-radial":
+          "radial-gradient(circle 550px at 50% 50%,hsla(153, 60%, 53%, .16),hsla(153, 60%, 53%, 0));",
+      },
       colors: {
+        text_gray: "#d2d2d2",
+        white: "#ffffff",
+        black: "#000000",
+        primary_green: "#3fcf8e",
+        primary_dark_green: "#207e53",
+        primary_light_green: "#63f3b2",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -59,8 +59,8 @@ const Exercises = ({ params }: { params: { id: string } }) => {
 
   return (
     <>
-      <main className="w-full h-full flex items-center justify-center flex-col gap-24">
-        <div className="w-full h-full flex items-center justify-center text-center flex-col gap-5">
+      <main className="w-full h-full">
+        <div className="w-full h-full flex items-center justify-center text-center flex-col gap-5 mt-24">
           <h1 className="text-4xl font-bold text-white">{rutine?.name}</h1>
           <p className="text-gray-400 text-base font-normal w-1/3">
             Aqui puedes ver tu rutina de entrenamiento, podrás agregarle
@@ -70,14 +70,14 @@ const Exercises = ({ params }: { params: { id: string } }) => {
             Puedes agregar mas ejercicios{" "}
             <Link
               href={`/dashboard/rutines/${id}/create`}
-              className="text-blue-600 underline underline-blue-600"
+              className="text-primary_green underline underline-blue-600"
             >
               aquí
             </Link>
           </small>
         </div>
         {exercises?.length === 0 && <Message params={id} />}
-        <div className="w-full h-full flex items-center justify-center flex-row gap-5">
+        <div className="w-full h-full flex items-center justify-center flex-row gap-5 mt-12 mb-6">
           {exercises?.map((exercise, index) => (
             <Exercise key={index} exercise={exercise} rutineId={id} />
           ))}

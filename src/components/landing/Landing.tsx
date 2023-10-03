@@ -1,47 +1,37 @@
 import React from "react"
-import Posts from "../posters/Posts"
-import { useRouter } from "next/navigation"
-import Model from "../model/Model"
+import { IconBarbell, IconBrandUnity } from "@tabler/icons-react"
+import ButtonLanding from "./button-landing"
 
 const Landing = () => {
-  const router = useRouter()
   return (
-    <main className="w-full h-[86.5vh] flex items-center justify-center text-center flex-row z-10">
-      <div className="w-1/2 h-max flex items-center justify-center flex-col gap-2">
+    <main className="relative top-0 left-0 w-full h-screen flex items-center justify-center text-center flex-row z-10">
+      <div className="w-full h-max flex items-center justify-center flex-col gap-2">
         <div className="">
-          <h1 className="text-white text-6xl font-bold flex flex-col justify-center items-center leading-tight select-none">
-            EL LUGAR PERFECTO PARA
-            <span className="special">CONSTRUIR TU</span>
-            CUERPO IDEAL
+          <h1 className="text-text_gray text-6xl font-normal flex flex-col justify-center items-center leading-tight select-none">
+            Is not an application
+            <span className="text-primary_green">It´s a life style</span>
           </h1>
         </div>
         <div className="w-1/3 flex justify-start items-start text-center">
           <p className="text-[#ffffff57] text-sm">
-            En Tavross te vamos a ayudar a construir tu cuerpo ideal y mantener
-            tu salud en muy buen estado.
+            At Tavross we are going to help you build your ideal body and
+            maintain your health in very good condition.
           </p>
         </div>
         <article className="w-full flex items-center justify-center flex-row gap-8 mt-5">
-          <div className="">
-            <button
-              onClick={() => router.push("/dashboard/rutines")}
-              className="w-40 h-12 bg-blue-800 text-white font-normal rounded hover:bg-blue-900 transition-all flex items-center justify-center flex-row"
-            >
-              <span className="">Comencemos</span>{" "}
-              <i className={["ri-arrow-right-line", "px-1"].join(" ")} />
-            </button>
-          </div>
+          <ButtonLanding
+            text="Start training"
+            url="/dashboard/rutines"
+            icon={<IconBarbell />}
+            className="border-primary_light_green/80 bg-primary_dark_green/60 hover:bg-primary_dark_green"
+          />
+          <ButtonLanding
+            text="View models"
+            url="dashboard/models"
+            icon={<IconBrandUnity />}
+            className="border-primary_light_green/40 bg-primary_dark_green/10 hover:bg-primary_dark_green/20"
+          />
         </article>
-      </div>
-      <div className="w-1/2 h-[86.5vh] flex items-center justify-center">
-        <Model
-          url={"ANIMACION_REMO"}
-          cameraPosition={{
-            x: 0.042,
-            y: 0.042,
-            z: 0.042,
-          }}
-        />
       </div>
     </main>
   )

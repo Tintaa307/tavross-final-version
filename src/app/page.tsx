@@ -1,24 +1,24 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import About from "@/components/about/About"
+import Landing from "@/components/landing/Landing"
+import Loader from "@/components/shared/Loader"
+import { statusAuth } from "@/objects/status"
+import { useSession } from "next-auth/react"
 
 export default function Home() {
-  const router = useRouter()
+  const { status } = useSession()
+  const { LOADING } = statusAuth
   return (
-    <main className="w-full h-screen flex items-center justify-center text-center flex-col gap-8">
-      <div className="">
-        <h1 className="text-white text-4xl font-semibold">
-          Welcome to <span className="text-blue-700">Tavross</span>
-        </h1>
-      </div>
-      <div className="">
-        <button
-          onClick={() => router.push("/dashboard")}
-          className="w-64 h-14 rounded-md bg-blue-800 text-white text-lg font-medium"
-        >
-          Go to my dashboard
-        </button>
-      </div>
-    </main>
+    <>
+      {status === LOADING ? (
+        <Loader />
+      ) : (
+        <>
+          <Landing />
+          <About />
+        </>
+      )}
+    </>
   )
 }

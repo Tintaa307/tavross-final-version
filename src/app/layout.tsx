@@ -1,5 +1,8 @@
+import Providers from "@/components/providers/Providers"
 import "./globals.css"
-import { Inter, Rubik } from "next/font/google"
+import { Rubik } from "next/font/google"
+import { Session } from "next-auth"
+import Nav from "@/components/nav/Nav"
 
 const rubik = Rubik({ subsets: ["latin"] })
 
@@ -10,12 +13,19 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  session,
 }: {
   children: React.ReactNode
+  session: Session | null
 }) {
   return (
     <html lang="en">
-      <body className={rubik.className}>{children}</body>
+      <Providers session={session}>
+        <body className={rubik.className}>
+          <Nav />
+          {children}
+        </body>
+      </Providers>
     </html>
   )
 }
